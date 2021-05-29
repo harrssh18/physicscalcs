@@ -1,0 +1,80 @@
+{%extends 'calc/base.html'%}
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock css%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Physics Calculators | Free Physics Calculators</title>
+<meta name="description"
+    content="Capacitance Calculator makes it easy for you to determine the value of capacitance, area, and distance with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property="og:description" content="Angular Resolution Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta name="twitter:description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Angular Resolution Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock meta %}
+{% block content %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Physics Calculators</h1>
+        </div>
+        <div class="card-body">
+	<ul>
+		<li><a href="{% url 'lc' %}">Length Contraction Calculator</a></li>
+		<li><a href="{% url 'capacitance' %}">Capacitance Calculator</a></li>
+		<li><a href="{% url 'cooling' %}">Newton's Law of Cooling Calculator</a></li>
+		<li><a href="{% url 'thermalconduct' %}">Thermal Conductivity Calculator</a></li>
+	</ul>
+	</div>
+</div>
+</div>
+	
+{% endblock content %}

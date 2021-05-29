@@ -1,0 +1,830 @@
+{%extends 'calc/base.html'%}
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock css%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Thermal Conductivity Calculator | Free Calculator to find Thermal Conductivity</title>
+<meta name="description"
+    content="Capacitance Calculator makes it easy for you to determine the value of capacitance, area, and distance with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property="og:description" content="Angular Resolution Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta name="twitter:description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Angular Resolution Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock meta %}
+
+{% block content %}
+{% if  tc and t and q and d%}
+<script>
+    $(document).ready(function () {
+
+        $("#hassle").click();
+
+
+    });
+
+
+</script>
+
+<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+{% endif %}
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Thermal Conductivity Calculator</h1>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="{% url 'thermalconduct' %}" method="POST" id="my_form">
+                {% csrf_token %}
+                 <div class="input-group mb-3">
+                      
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Choose Option</span>
+        </div>
+    
+  
+       <select id="Given" name="Given"  style="margin-top: 5px;width:100%" class="select form-control" id="inlineFormInputGroup" onchange="this.form.submit()">
+          
+          
+            {% if Given == 'form1' %}
+            <option value='form1' selected="selected">Find Heat Flux | Using Distance, Thermal Conductivity Constant and Temperature Difference</option>  
+            {% else %}
+            <option value='form1' >Find Heat Flux | Using Distance, Thermal Conductivity Constant and Temperature Difference</option>  
+            {% endif %}
+
+            {% if Given == 'form2' %}
+            <option value='form2' selected="selected">Find  Distance | Using Heat flux, Thermal Conductivity Constant and Temperature Difference</option>  
+            {% else %}
+            <option value='form2' >Find  Distance | Using Heat flux, Thermal Conductivity Constant and Temperature Difference</option>  
+            {% endif %}
+
+            {% if Given == 'form3' %}
+            <option value='form3' selected="selected">Find Thermal Conductivity Constant | Using Heat flux, Distance and Temperature Difference</option>  
+            {% else %}
+            <option value='form3' >Find Thermal Conductivity Constant | Using Heat flux, Distance and Temperature Difference</option>  
+            {% endif %} 
+
+            {% if Given == 'form4' %}
+            <option value='form4' selected="selected">Find Temperature Difference | Using Heat flux, Distance and Thermal Conductivity Constant</option>  
+            {% else %}
+            <option value='form4' >Find Temperature Difference | Using Heat flux, Distance and Thermal Conductivity Constant</option>  
+            {% endif %}           
+          </select>                     
+      </div>
+       
+
+          {% if Given != "form1" %}
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Heat Flux (q)</span>
+            </div>
+            <input style="margin-top: 5px;width:100%" id="q" name="q" value="{{q}}"  required="" class="form-control" type="text" required width="48"  >
+           <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/m²</span>
+          </div> 
+
+          {% endif %}         
+        
+          {% if Given != "form2" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Distance (Δx)</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                            {% if d_op == 'mm' %}
+                            <option value="mm" selected="selected">millimeters (mm) </option>
+                            {% else %}
+                            <option value="mm">millimeters (mm) </option>
+                            {% endif %}
+
+                            {% if d_op == 'm' %}
+                            <option value="m" selected="selected">meters (m)</option>
+                            {% else %}
+                            <option value="m">meters (m)</option>
+                            {% endif %}
+
+                            {% if d_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeters (cm)</option>
+                            {% else %}
+                            <option value="cm">centimeters(cm)</option>
+                            {% endif %}
+
+                            {% if d_op == 'km' %}
+                            <option value="km" selected="selected">Kilometers (km)</option>
+                            {% else %}
+                            <option value="km">Kilometers (km)</option>
+                            {% endif %}
+
+                            {% if d_op == 'in' %}
+                            <option value="in" selected="selected">inches (in)</option>
+                            {% else %}
+                            <option value="in">inches (in)</option>
+                            {% endif %}
+
+                            {% if d_op == 'ft' %}
+                            <option value="ft" selected="selected">feets (ft)</option>
+                            {% else %}
+                            <option value="ft">feets (ft)</option>
+                            {% endif %}
+
+                            {% if d_op == 'yd' %}
+                            <option value="yd" selected="selected">yards (yd)</option>
+                            {% else %}
+                            <option value="yd">yards (yd)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mi' %}
+                            <option value="mi" selected="selected">miles (mi)</option>
+                            {% else %}
+                            <option value="mi">miles (mi)</option>
+                            {% endif %}
+                        </select> 
+          </div>
+          {% endif %}        
+        
+          {% if Given != "form3" %}
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Thermal conductivity constant (λ)</span>
+            </div>
+            <input style="margin-top: 5px;width:100%" id="tc" name="tc" value="{{tc}}"  required="" class="form-control" type="text" required width="48"  >
+           <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/(m-K)</span>
+          </div> 
+
+          {% endif %}       
+        
+          {% if Given != "form4" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Temperature difference (ΔT)</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="t_op">
+                            {% if t_op == 'c' %}
+                            <option value="c" selected="selected">Celsius (°C) </option>
+                            {% else %}
+                            <option value="c">Celsius (°C) </option>
+                            {% endif %}
+
+                            {% if t_op == 'f' %}
+                            <option value="f" selected="selected">Fahreneit (°F) </option>
+                            {% else %}
+                            <option value="f">Fahreneit (°F) </option>
+                            {% endif %}
+
+                            {% if t_op == 'k' %}
+                            <option value="k" selected="selected">Kelvin (K)</option>
+                            {% else %}
+                            <option value="k">Kelvin (K)</option>
+                            {% endif %}
+
+                            {% if t_op == 'r' %}
+                            <option value="r" selected="selected">Rankine (°R)</option>
+                            {% else %}
+                            <option value="r">Rankine(°R)</option>
+                            {% endif %}
+
+                            {% if t_op == 'de' %}
+                            <option value="de" selected="selected">Deliste (°De)</option>
+                            {% else %}
+                            <option value="de">Deliste (°De)</option>
+                            {% endif %}
+
+                            {% if t_op == 'n' %}
+                            <option value="n" selected="selected">Newton (°N)</option>
+                            {% else %}
+                            <option value="n">Newton (°N)</option>
+                            {% endif %}
+
+                            {% if t_op == 're' %}
+                            <option value="re" selected="selected">Reaumur (°Re)</option>
+                            {% else %}
+                            <option value="re">Reaumur (°Re)</option>
+                            {% endif %}
+
+                            {% if t_op == 'ro' %}
+                            <option value="ro" selected="selected">Romer (°Ro)</option>
+                            {% else %}
+                            <option value="ro">Romer (°Ro)</option>
+                            {% endif %}
+
+                        </select> 
+          </div>
+          {% endif %}  
+        
+          <div class=" center col mt-2 ">
+            <center><button type="submit" class="btn btn-primary">Calculate</button>
+              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
+            </center>
+          </div>
+</form>
+
+  </div>
+    </div>
+</div>
+</div>
+<div id="clear">
+<div class="container" style="height: auto !important;">
+    {% if Given == "form1" and tc and t and d %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Heat Flux (q):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Heat Flux (q):-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Heat Flux Formula q = - λ * ΔT / Δx</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>λ is the thermal conductivity of the material,</li>
+                        <li>ΔT is the temperature difference across the object,</li>
+                        <li>Δx is the distance of heat transfer (the thickness of the object),</li>
+                        <li>q is the heat flux, measured in W/m².</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>λ = {{tc}} W/(m-K)</p>
+            <p>ΔT = {{t}} {{t_op}}</p>
+            <p>Δx = {{d}} {{d_op}}</p>
+
+            
+            
+            {% if d_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 100.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 1000.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1000</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 39.37</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1.094</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 3.28084</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) * 1609</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% endif %}
+
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'r' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'de' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'n' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
+            </details>
+            <p>ΔT = {{tm}} °</p>
+            {% elif t_op == 're' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'ro' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% endif %}   
+            
+            <strong>Put values into formula</strong>
+
+
+            <p>Heat Flux (q) = - {{tc}} * {{tm}} / {{dm}} M/w²</p>
+            
+            <center><b id="formula" style="font-size:25px;">Heat Flux (q) = {{result}} M/w² </b></center>
+            
+   </div>
+    </div>
+    {% endif %}
+
+    {% if Given == "form2" and tc and t and q %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Distance (Δx):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Distance (Δx):-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Distance Formula Δx = - λ * ΔT / q</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>λ is the thermal conductivity of the material,</li>
+                        <li>ΔT is the temperature difference across the object,</li>
+                        <li>Δx is the distance of heat transfer (the thickness of the object),</li>
+                        <li>q is the heat flux, measured in W/m².</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>λ = {{tc}} W/(m-K)</p>
+            <p>ΔT = {{t}} {{t_op}}</p>
+            <p>q = {{q}} W/m<sup>2</sup></p>
+
+            
+            
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'r' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'de' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'n' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
+            </details>
+            <p>ΔT = {{tm}} °</p>
+            {% elif t_op == 're' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'ro' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% endif %}   
+            
+            <strong>Put values into formula</strong>
+
+
+            <p>Distance (Δx) = - {{tc}} * {{tm}} / {{q}} m</p>
+            
+            <center><b id="formula" style="font-size:25px;">Distance (Δx) = {{result}} m </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+
+
+    {% if Given == "form3" and q and t and d %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Thermal conductivity constant (λ):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Thermal conductivity constant (λ):-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Thermal conductivity constant Formula λ = - q * ΔT / Δx</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>λ is the thermal conductivity of the material W/(m-K),</li>
+                        <li>ΔT is the temperature difference across the object,</li>
+                        <li>Δx is the distance of heat transfer (the thickness of the object),</li>
+                        <li>q is the heat flux, measured in W/m².</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>q = {{q}} W/m²</p>
+            <p>ΔT = {{t}} {{t_op}}</p>
+            <p>Δx = {{d}} {{d_op}}</p>
+
+            
+            
+            {% if d_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 100.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 1000.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1000</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 39.37</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1.094</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 3.28084</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) * 1609</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% endif %}
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'r' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'de' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'n' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 're' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% elif t_op == 'ro' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
+            </details>
+            <p>ΔT = {{tm}} °C</p>
+            {% endif %}         
+
+            
+            <strong>Put values into formula</strong>
+
+
+            <p>Thermal conductivity constant λ = -{{q}} * {{dm}} / {{tm}} M/w²</p>
+            
+            <center><b id="formula" style="font-size:25px;">Thermal conductivity constant λ = {{result}} M/(m-K) </b></center>
+            
+   </div>
+    </div>
+    {% endif %}
+    {% if Given == "form4" and q and tc and d %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Temperature Difference (ΔT):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Temperature Difference (ΔT):-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Temperature Difference Formula ΔT = q * Δx / -λ</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>λ is the thermal conductivity of the material W/(m-K),</li>
+                        <li>ΔT is the temperature difference across the object,</li>
+                        <li>Δx is the distance of heat transfer (the thickness of the object),</li>
+                        <li>q is the heat flux, measured in W/m².</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>q = {{q}} W/m²</p>
+            <p>λ = {{tc}} W/(m-K)</p>
+            <p>Δx = {{d}} {{d_op}}</p>
+
+            
+            
+            {% if d_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 100.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(s) * 1000.0</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1000</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 39.37</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 1.094</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) / 3.28084</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% elif d_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Distance(Δx) * 1609</p>
+            </details>
+            <p>Δx = {{dm}} m</p>
+            {% endif %}
+
+          
+            <strong>Put values into formula</strong>
+
+
+            <p>Temperature Difference ΔT = {{q}} * {{dm}} / -{{tc}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Temperature Difference ΔT = {{result}} °C </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+            
+   </div>
+    </div>
+    {% endif %}
+</div></div>
+
+
+{% endblock content %}

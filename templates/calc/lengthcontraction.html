@@ -1,0 +1,728 @@
+{%extends 'calc/base.html'%}
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock css%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Length Contraction Calculator | Free Calculator to find Length Contraction</title>
+<meta name="description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property="og:description" content="Angular Resolution Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta name="twitter:description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Angular Resolution Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock meta %}
+
+{% block content %}
+{% if  v and l and sr %}
+<script>
+    $(document).ready(function () {
+
+        $("#hassle").click();
+
+
+    });
+
+
+</script>
+
+<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+{% endif %}
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Length Constration Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+            {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            <form action="{% url 'lc' %}" method="POST" id="my_form">
+                {% csrf_token %}
+                 <div class="input-group mb-3">
+                      
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Choose Option</span>
+        </div>
+    
+  
+        <select id="Given" name="Given"  style="margin-top: 5px;width:100%" class="select form-control" id="inlineFormInputGroup" onchange="this.form.submit()">
+          
+            {% if Given == "form1" %}
+            <option value="form1" selected="selected">Find Special Relativity | Using Length and Velocity</option>  
+            {% else %}
+            <option value="form1" >Find Special Relativity | Using Length and Velocity</option>  
+            {% endif %}
+
+            {% if Given == "form2" %}
+            <option value="form2" selected="selected">Find Velocity | Using Length and Special Relativity</option>  
+            {% else %}
+            <option value="form2" >Find Velocity | Using Length and Special Relativity</option>  
+            {% endif %}
+            
+            {% if Given == "form3" %}
+            <option value='form3' selected="selected">Find Length | Using Velocity and Special Relativity</option>  
+            {% else %}
+            <option value="form3" >Find Length | Using Velocity and Special Relativity</option>  
+            {% endif %}            
+          </select>                     
+      </div>
+       
+
+          {% if Given != "form3" %}
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Length</span>
+            </div>
+            <input style="margin-top: 5px;width:100%" id="l" name="l" value="{{l}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="l_op">
+                            {% if l_op == 'm' %}
+                            <option value="m" selected="selected">meter (m)</option>
+                            {% else %}
+                            <option value="m">meter (m)</option>
+                            {% endif %}
+                            {% if l_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeter (cm)</option>
+                            {% else %}
+                            <option value="cm">centimeter (cm)</option>
+                            {% endif %}
+                            {% if l_op == 'mm' %}
+                            <option value="mm" selected="selected">millimeter (mm)</option>
+                            {% else %}
+                            <option value="mm">millimeter (mm)</option>
+                            {% endif %}
+                            {% if l_op == 'km' %}
+                            <option value="km" selected="selected">kilometer (km)</option>
+                            {% else %}
+                            <option value="km">kilometer (km)</option>
+                            {% endif %}
+                            {% if l_op == 'in' %}
+                            <option value="in" selected="selected">inches (in)</option>
+                            {% else %}
+                            <option value="in">inches (in)</option>
+                            {% endif %}
+                            {% if l_op == 'ft' %}
+                            <option value="ft" selected="selected">feet (ft)</option>
+                            {% else %}
+                            <option value="ft">feet (ft)</option>
+                            {% endif %}
+                            {% if l_op == 'yd' %}
+                            <option value="yd" selected="selected">yard (yd)</option>
+                            {% else %}
+                            <option value="yd">yard (yd)</option>
+                            {% endif %}
+                            {% if l_op == 'mi' %}
+                            <option value="mi" selected="selected">miles (mi)</option>
+                            {% else %}
+                            <option value="mi">miles (mi)</option>
+                            {% endif %}
+                        </select> 
+              
+            </select>
+          </div> 
+
+          {% endif %}         
+        
+          {% if Given != "form2" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Observed Velocity</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="v" name="v" value="{{v}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="v_op">
+                            {% if v_op == 'm/s' %}
+                            <option value="m/s" selected="selected">meter per second(m/s)</option>
+                            {% else %}
+                            <option value="m/s">meter per second(m/s)</option>
+                            {% endif %}
+                            {% if v_op == 'km/s' %}
+                            <option value="km/s" selected="selected">kilometer per second(km/s)</option>
+                            {% else %}
+                            <option value="km/s">kilometer per second(km/s)</option>
+                            {% endif %}
+                            {% if v_op == 'mi/s' %}
+                            <option value="mi/s" selected="selected">miles per second (mi/s)</option>
+                            {% else %}
+                            <option value="mi/s">miles per second (mi/s)</option>
+                            {% endif %}
+                            {% if v_op == 'c' %}
+                            <option value="c" selected="selected">light speed(c)</option>
+                            {% else %}
+                            <option value="c">light speed(c)</option>
+                            {% endif %}
+                        </select> 
+          </div>
+          {% endif %}        
+        
+          {% if Given != "form1"  %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Special Relativity</span>
+              </div>
+              <input style="margin-top: 5px;width:100%" id="sr" name="sr" value="{{sr}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="sr_op">
+                            {% if sr_op == 'm' %}
+                            <option value="m" selected="selected">meter (m)</option>
+                            {% else %}
+                            <option value="m">meter (m)</option>
+                            {% endif %}
+                            {% if sr_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeter (cm)</option>
+                            {% else %}
+                            <option value="cm">centimeter (cm)</option>
+                            {% endif %}
+                            {% if sr_op == 'mm' %}
+                            <option value="mm" selected="selected">millimeter (mm)</option>
+                            {% else %}
+                            <option value="mm">millimeter (mm)</option>
+                            {% endif %}
+                            {% if sr_op == 'km' %}
+                            <option value="km" selected="selected">kilometer (km)</option>
+                            {% else %}
+                            <option value="km">kilometer (km)</option>
+                            {% endif %}
+                            {% if sr_op == 'in' %}
+                            <option value="in" selected="selected">inches (in)</option>
+                            {% else %}
+                            <option value="in">inches (in)</option>
+                            {% endif %}
+                            {% if sr_op == 'ft' %}
+                            <option value="ft" selected="selected">feet (ft)</option>
+                            {% else %}
+                            <option value="ft">feet (ft)</option>
+                            {% endif %}
+                            {% if sr_op == 'yd' %}
+                            <option value="yd" selected="selected">yard (yd)</option>
+                            {% else %}
+                            <option value="yd">yard (yd)</option>
+                            {% endif %}
+                            {% if sr_op == 'mi' %}
+                            <option value="mi" selected="selected">miles (mi)</option>
+                            {% else %}
+                            <option value="mi">miles (mi)</option>
+                            {% endif %}
+                        </select> 
+              
+            </select>
+                        </div>
+            {% endif %}        
+        
+          <div class=" center col mt-2 ">
+            <center><button type="submit" class="btn btn-primary">Calculate</button>
+              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
+            </center>
+          </div>
+</form>
+
+  </div>
+    </div>
+</div>
+
+<div id="clear">
+<div class="container" style="height: auto !important;">
+    {% if Given == "form1" and l and v %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Special Relativity:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Special Relativity:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Special Relativity = L * γ</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>L is the length of object in its rest frame,</li>
+                        <li>γ is the lorentz factor , γ = √(1 - v<sup>2</sup> / c<sup>2</sup>)</li>
+                        <li>V is the speed of object( Observed Velocity).</li>
+                        <li>C is the speed of light(299 792 458 m/s).</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>L = {{l}} {{l_op}}</p>
+            <p>V = {{v}} {{v_op}}</p>
+
+            
+
+            
+            {% if l_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 100.0</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1000</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1000</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 39.37</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1.094</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 3.28084</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{sr}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1609</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% endif %}
+
+
+            
+            {% if v_op == 'km/s' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 1000</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% elif v_op == 'mi/s' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 1609</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% elif v_op == 'c' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 299 792 458</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% endif %}
+          
+            <strong>Put values into formula</strong>
+
+
+            <p>Special relativity = {{lm}} * {{y}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Special Relativity = {{result}}  m </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+    {% endif %}
+    {% if Given == "form2" and l and sr %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Velocity:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Velocity formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Velocity(V) =  Special Relativity(SR) / Length(L)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V is the Observerd Velocity,</li>
+                        <li>RL is the Relative Length,</li>
+                        <li>L is the Length.</li>
+                    </ul>
+
+
+
+            <strong>Input values are:-</strong>
+            <p>SR = {{sr}} {{sr_op}}</p>
+            <p>L = {{l}} {{l_op}}</p>
+
+            
+
+            {% if sr_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1000</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 100.0</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1000</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 39.37</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1.094</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 3.28084</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1609</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% endif %}
+
+            {% if l_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1000</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 100.0</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1000</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 39.37</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 1.094</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) / 3.28084</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% elif l_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Length(L) * 1609</p>
+            </details>
+            <p>L = {{lm}} m</p>
+            {% endif %}
+
+           
+          
+            <strong>Put values into formula</strong>
+            <p>Velocity = {{srm}} / {{lm}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Velocity = {{result}} m/s</b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+           
+</div>
+    {% endif %}
+        {% if Given == "form3" and sr and v %}
+        <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Length:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Length formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">length(L) =  Special Relativity(SR) / Lorzent Factor(y)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V is the Observerd Velocity,</li>
+                        <li>SR is the  Special Relativity ,</li>
+                        <li>L is the Length,</li>
+                        <li>y is the Lorzent Factor(√(1 - v<sup>2</sup> / c<sup>2</sup>)) ,</li>
+                        <li>C is the speed of light(299 792 458 m/s).</li>
+                    </ul>
+
+
+
+            <strong>Input values are:-</strong>
+            <p>SR = {{sr}} {{sr_op}}</p>
+            <p>V = {{v}} {{v_op}}</p>
+
+            
+        
+            {% if sr_op == 'km' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) * 1000</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) * 100.0</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) / 1000</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) / 39.37</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) / 1.094</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) / 3.28084</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% elif sr_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Special Relativity(SR) * 1609</p>
+            </details>
+            <p>SR = {{srm}} m</p>
+            {% endif %}
+
+
+            {% if v_op == 'km/s' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 1000</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% elif v_op == 'mi/s' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 1609</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% elif v_op == 'c' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter/s  = Velocity(V) * 299 792 458</p>
+            </details>
+            <p>V = {{vm}} m/s</p>
+            {% endif %}
+           
+          
+            <strong>Put values into formula</strong>
+            <p>Velocity = {{srm}} / √(1 - ({{vm}})<sup>2</sup> / (299792458)<sup>2</sup>)</p>
+            
+            <center><b id="formula" style="font-size:25px;">Velocity = {{result}} meter</b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+
+           
+</div>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

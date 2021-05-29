@@ -1,0 +1,916 @@
+{%extends 'calc/base.html'%}
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock css%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Newton's Law of Cooling Calculator | Free Calculator to find ewton's Law of Cooling</title>
+<meta name="description"
+    content="Capacitance Calculator makes it easy for you to determine the value of capacitance, area, and distance with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property="og:description" content="Angular Resolution Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta name="twitter:description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Angular Resolution Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock meta %}
+
+{% block content %}
+{% if  t and tp and k and at and it %}
+<script>
+    $(document).ready(function () {
+
+        $("#hassle").click();
+
+
+    });
+
+
+</script>
+
+<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+{% endif %}
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Newton's Law of Cooling Calculator</h1>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="{% url 'cooling' %}" method="POST" id="my_form">
+                {% csrf_token %}
+                 <div class="input-group mb-3">
+                      
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Choose Option</span>
+        </div>
+    
+  
+       <select id="Given" name="Given"  style="margin-top: 5px;width:100%" class="select form-control" id="inlineFormInputGroup" onchange="this.form.submit()">
+          
+          
+            {% if Given == 'form1' %}
+            <option value='form1' selected="selected">Find Temperature | Using Ambient temperature, initial temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% else %}
+            <option value='form1' >Find Temperature | Using Ambient Temperature, initial temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% endif %}
+
+            {% if Given == 'form2' %}
+            <option value='form2' selected="selected">Find Ambient Temperature | Using Temperature, initial temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% else %}
+            <option value='form2' >Find Ambient Temperature | Using Temperature, initial temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% endif %}
+
+            {% if Given == 'form3' %}
+            <option value='form3' selected="selected">Find Initial Temperature | Using Temperature,  ambient temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% else %}
+            <option value='form3' >Find Initial Temperature | Using Temperature,  ambient temperature, Cooling constant, and What's the temperature after time.</option>  
+            {% endif %}   
+
+            {% if Given == 'form4' %}
+            <option value='form4' selected="selected">Find Cooling constant | Using Temperature,  ambient temperature, Initial Temperature, and What's the temperature after time.</option>  
+            {% else %}
+            <option value='form4' >Find Cooling constant | Using Temperature,  ambient temperature, Initial Temperature, and What's the temperature after time.</option>  
+            {% endif %}   
+
+            {% if Given == 'form5' %}
+            <option value='form5' selected="selected">Find What's the temperature after time | Using Temperature,  ambient temperature, Cooling constant, and Initial Temperature.</option>  
+            {% else %}
+            <option value='form5' >Find What's the temperature after time | Using Temperature,  ambient temperature, Cooling constant, and Initial Temperature.</option>  
+            {% endif %}            
+          </select>                     
+      </div>
+       
+
+          {% if Given != "form3" %}
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Initial Temperature (it)</span>
+            </div>
+            <input style="margin-top: 5px;width:100%" id="it" name="it" value="{{it}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="it_op">
+                            {% if it_op == 'c' %}
+                            <option value="c" selected="selected">Celsius (°C)</option>
+                            {% else %}
+                            <option value="c">Celsius (°C)</option>
+                            {% endif %}
+
+                            {% if it_op == 'f' %}
+                            <option value="f" selected="selected">Fahrenheit (°F)</option>
+                            {% else %}
+                            <option value="f">Fahrenheit (°F)</option>
+                            {% endif %}
+
+                            {% if it_op == 'k' %}
+                            <option value="k" selected="selected">Kelvin (K)</option>
+                            {% else %}
+                            <option value="k">Kelvin (K)</option>
+                            {% endif %}
+                        </select> 
+              
+            </select>
+          </div> 
+
+          {% endif %}         
+        
+          {% if Given != "form2" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Ambient Temperature (at)</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="at" name="at" value="{{at}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="at_op">
+                            {% if at_op == 'c' %}
+                            <option value="c" selected="selected">Celsius (°C)</option>
+                            {% else %}
+                            <option value="c">Celsius (°C)</option>
+                            {% endif %}
+
+                            {% if at_op == 'f' %}
+                            <option value="f" selected="selected">Fahrenheit (°F)</option>
+                            {% else %}
+                            <option value="f">Fahrenheit (°F)</option>
+                            {% endif %}
+
+                            {% if at_op == 'k' %}
+                            <option value="k" selected="selected">Kelvin (K)</option>
+                            {% else %}
+                            <option value="k">Kelvin (K)</option>
+                            {% endif %}
+                        </select> 
+          </div>
+          {% endif %}        
+        
+          {% if Given != "form4"  %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Cooling constant (k)</span>
+              </div>
+              <input style="margin-top: 5px;width:100%" id="k" name="k" value="{{k}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="k_op">
+                            {% if k_op == 'sec' %}
+                            <option value="sec" selected="selected">per second (sec⁻¹)</option>
+                            {% else %}
+                            <option value="sec">per second(sec⁻¹)</option>
+                            {% endif %}
+                            {% if k_op == 'min' %}
+                            <option value="min" selected="selected">per minute (min⁻¹)</option>
+                            {% else %}
+                            <option value="min">per minute(min⁻¹)</option>
+                            {% endif %}
+                            {% if k_op == 'hrs' %}
+                            <option value="hrs" selected="selected">per hour (hrs⁻¹)</option>
+                            {% else %}
+                            <option value="hrs">per hour(hrs⁻¹)</option>
+                            {% endif %}
+                            
+                       </select> 
+                        </div>
+            {% endif %} 
+             {% if Given != "form5"  %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">What's the temperature after time (tp)</span>
+              </div>
+              <input style="margin-top: 5px;width:100%" id="tp" name="tp" value="{{tp}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="tp_op">
+                            {% if tp_op == 'sec' %}
+                            <option value="sec" selected="selected">Seconds (sec)</option>
+                            {% else %}
+                            <option value="sec">Seconds (sec)</option>
+                            {% endif %}
+                            {% if tp_op == 'min' %}
+                            <option value="min" selected="selected">Minutes (min)</option>
+                            {% else %}
+                            <option value="min">Minutes (min)</option>
+                            {% endif %}
+                            {% if tp_op == 'hrs' %}
+                            <option value="hrs" selected="selected">Hours (hrs)</option>
+                            {% else %}
+                            <option value="hrs">Hours (hrs)</option>
+                            {% endif %}
+                            
+                       </select> 
+                        </div>
+            {% endif %}      
+
+        {% if Given != "form1" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Temperature (t)</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="t_op">
+                            {% if t_op == 'c' %}
+                            <option value="c" selected="selected">Celsius (°C)</option>
+                            {% else %}
+                            <option value="c">Celsius (°C)</option>
+                            {% endif %}
+
+                            {% if t_op == 'f' %}
+                            <option value="f" selected="selected">Fahrenheit (°F)</option>
+                            {% else %}
+                            <option value="f">Fahrenheit (°F)</option>
+                            {% endif %}
+
+                            {% if t_op == 'k' %}
+                            <option value="k" selected="selected">Kelvin (K)</option>
+                            {% else %}
+                            <option value="k">Kelvin (K)</option>
+                            {% endif %}
+                        </select> 
+          </div>
+          {% endif %}   
+        
+          <div class=" center col mt-2 ">
+            <center><button type="submit" class="btn btn-primary">Calculate</button>
+              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
+            </center>
+          </div>
+</form>
+
+  </div>
+    </div>
+</div>
+</div>
+
+
+<div id="clear">
+<div class="container" style="height: auto !important;">
+    {% if Given == "form1" and tp and k and at and it %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Temperature:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Temperature:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Temperature Formula T = at + (it - at) * exp(- k * tp)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is the temperature of the object at the time t,</li>
+                        <li>at is the ambient temperature,</li>
+                        <li>it is the initial temperature of the object,</li>
+                        <li>k is the cooling coefficient</li>
+                        <li>tp is the time of the cooling.</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>at = {{at}} {{at_op}}</p>
+            <p>tp = {{tp}} {{tp_op}}</p>
+            <p>it = {{it}} {{it_op}}</p>
+            <p>k = {{k}} {{k_op}}⁻¹</p>
+
+            {% if at_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Ambient Temperature(at) - 273.15 </p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% elif at_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "°{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Ambient Temperature(at) -32) * 5/9</p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% endif %}         
+
+            {% if tp_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 60 </p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% elif tp_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "°{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 3600</p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% endif %}      
+
+            {% if it_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Initial Temperature(it) - 273.15 </p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% elif it_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "°{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Initial Temperature(it) -32) * 5/9</p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% endif %}           
+
+
+            {% if k_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.016667 </p>
+            </details>
+            <p>k = {{ks}} Sec⁻¹</p>
+            {% elif k_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "°{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.0002778</p>
+            </details>
+            <p>K = {{ks}} sec⁻¹</p>
+            {% endif %}
+            <strong>Put values into formula</strong>
+            <p>Temperature T = {{atc}} + ({{itc}} - {{at}}) * exp(- {{ks}} * {{tps}})</p>
+            
+            <center><b id="formula" style="font-size:25px;">Temperature = {{result}} °C </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+
+    {% if Given == "form2" and tp and k and t and it %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Ambient Temperature (at):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Temperature:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Ambient Temperature Formula at = t - it * exp(- k * tp)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is the temperature of the object at the time tp,</li>
+                        <li>at is the ambient temperature,</li>
+                        <li>it is the initial temperature of the object,</li>
+                        <li>k is the cooling coefficient</li>
+                        <li>tp is the time of the cooling.</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>t = {{t}} {{t_op}}</p>
+            <p>tp = {{tp}} {{tp_op}}</p>
+            <p>it = {{it}} {{it_op}}</p>
+            <p>k = {{k}} {{k_op}}⁻¹</p>
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature(t) - 273.15 </p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature(t) -32) * 5/9</p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% endif %}         
+
+            {% if tp_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 60 </p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% elif tp_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "°{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 3600</p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% endif %}      
+
+            {% if it_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Initial Temperature(it) - 273.15 </p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% elif it_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "°{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Initial Temperature(it) -32) * 5/9</p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% endif %}           
+
+
+            {% if k_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.016667 </p>
+            </details>
+            <p>k = {{ks}} Sec⁻¹</p>
+            {% elif k_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "°{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.0002778</p>
+            </details>
+            <p>K = {{ks}} sec⁻¹</p>
+            {% endif %}
+            <strong>Put values into formula</strong>
+            <p>Ambient Temperature at = {{tc}} - {{itc}} * exp(- {{ks}} * {{tps}})</p>
+            
+            <center><b id="formula" style="font-size:25px;">Temperature = {{result}} °C </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+
+    {% if Given == "form3" and tp and k and t and at %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Initial Temperature (at):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Temperature:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Initial Temperature Formula it = at + (t-at) * exp(-k*(tp))</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is the temperature of the object at the time tp,</li>
+                        <li>at is the ambient temperature,</li>
+                        <li>it is the initial temperature of the object,</li>
+                        <li>k is the cooling coefficient</li>
+                        <li>tp is the time of the cooling.</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>t = {{t}} {{t_op}}</p>
+            <p>tp = {{tp}} {{tp_op}}</p>
+            <p>at = {{at}} {{at_op}}</p>
+            <p>k = {{k}} {{k_op}}⁻¹</p>
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature(t) - 273.15 </p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature(t) -32) * 5/9</p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% endif %}         
+
+            {% if tp_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 60 </p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% elif tp_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "°{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 3600</p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% endif %}      
+
+            {% if at_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Ambient Temperature(at) - 273.15 </p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% elif at_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "°{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Ambient Temperature(at) -32) * 5/9</p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% endif %}           
+
+
+            {% if k_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.016667 </p>
+            </details>
+            <p>k = {{ks}} Sec⁻¹</p>
+            {% elif k_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "°{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.0002778</p>
+            </details>
+            <p>K = {{ks}} sec⁻¹</p>
+            {% endif %}
+            <strong>Put values into formula</strong>
+            <p>Initial Temperature (it) = {{atc}} + ({{tc}}-{{atc}}) * exp(-{{ks}}*{{tps}})</p>
+            
+            <center><b id="formula" style="font-size:25px;">Initial Temperature (it) = {{result}} °C </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+        {% if Given == "form4" and tp and it and t and at %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Cooling constant (k):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Cooling constant:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active text-justify">Cooling constant Formula ek = (it-at) / (t-at)<br>
+            k = In(ek)/tp</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is the temperature of the object at the time tp,</li>
+                        <li>at is the ambient temperature,</li>
+                        <li>it is the initial temperature of the object,</li>
+                        <li>k is the cooling coefficient</li>
+                        <li>tp is the time of the cooling.</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>t = {{t}} {{t_op}}</p>
+            <p>tp = {{tp}} {{tp_op}}</p>
+            <p>at = {{at}} {{at_op}}</p>
+            <p>it = {{it}} {{it_op}}⁻¹</p>
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature(t) - 273.15 </p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature(t) -32) * 5/9</p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% endif %}         
+
+            {% if tp_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 60 </p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% elif tp_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Object at time (tp) {{tp}} <b> "°{{tp_op}}" </b> to
+                <b>"Sec"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec  = Object at time (tp) * 3600</p>
+            </details>
+            <p>tp = {{tps}} Sec</p>
+            {% endif %}      
+
+            {% if at_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Ambient Temperature(at) - 273.15 </p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% elif at_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "°{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Ambient Temperature(at) -32) * 5/9</p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% endif %}  
+
+            {% if it_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Initial Temperature(it) - 273.15 </p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% elif it_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "°{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Initial Temperature(it) -32) * 5/9</p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% endif %}           
+
+
+            
+            <strong>Put values into formula</strong>
+            <p>Cooling Constant(K)  ek =  ({{itc}}-{{atc}}) / ({{tc}}-{{atc}})<br> k = In({{ek}}) / {{tps}}
+            </p>
+            
+            <center><b id="formula" style="font-size:25px;">Cooling Constant(K) = {{result}} Sec⁻¹ </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+    {% if Given == "form5" and it and k and t and at %}
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find What's the temperature after (tp):</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Temperature:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">What's the temperature after.. ek = (it-at) / (t-at)<br>
+            tp = In(ek)/k</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is the temperature of the object at the time tp,</li>
+                        <li>at is the ambient temperature,</li>
+                        <li>it is the initial temperature of the object,</li>
+                        <li>k is the cooling coefficient</li>
+                        <li>tp is the time of the cooling.</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>t = {{t}} {{t_op}}</p>
+            <p>tp = {{tp}} {{tp_op}}</p>
+            <p>it = {{it}} {{it_op}}</p>
+            <p>k = {{k}} {{k_op}}⁻¹</p>
+
+            {% if t_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature {{t}} <b> "{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  =  Temperature(t) - 273.15 </p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% elif t_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature {{t}} <b> "°{{t_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = ( Temperature(t) -32) * 5/9</p>
+            </details>
+            <p>t = {{tc}} °C</p>
+            {% endif %}         
+
+            {% if it_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Initial Temperature(it) - 273.15 </p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% elif it_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Initial Temperature {{it}} <b> "°{{it_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Initial Temperature(it) -32) * 5/9</p>
+            </details>
+            <p>it = {{itc}} °C</p>
+            {% endif %}       
+
+            {% if at_op == 'k' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = Ambient Temperature(at) - 273.15 </p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% elif at_op == 'f' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Ambient Temperature {{at}} <b> "°{{at_op}}" </b> to
+                <b>"Celsius"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Celsius  = (Ambient Temperature(at) -32) * 5/9</p>
+            </details>
+            <p>at = {{atc}} °C</p>
+            {% endif %}           
+
+
+            {% if k_op == 'min' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.016667 </p>
+            </details>
+            <p>k = {{ks}} Sec⁻¹</p>
+            {% elif k_op == 'hrs' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Cooling constant(k) {{k}}⁻¹ <b> "°{{k_op}}" </b> to
+                <b>"Sec⁻¹"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p> Sec⁻¹  = Cooling constant(k) * 0.0002778</p>
+            </details>
+            <p>K = {{ks}} sec⁻¹</p>
+            {% endif %}
+            <strong>Put values into formula</strong>
+            <p>What's the temperature after..(tp) = ({{itc}}-{{atc}}) / ({{tc}}-{{atc}})<br> k = In({{ek}}) / {{kps}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Temperature after..(tp) = {{result}} Sec </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock content %}

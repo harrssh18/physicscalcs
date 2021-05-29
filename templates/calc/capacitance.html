@@ -1,0 +1,693 @@
+{%extends 'calc/base.html'%}
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock css%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Capacitance Calculator | Free Calculator to find Capacitance</title>
+<meta name="description"
+    content="Capacitance Calculator makes it easy for you to determine the value of capacitance, area, and distance with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property="og:description" content="Angular Resolution Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta name="twitter:description"
+    content="Angular Resolution Calculator makes it easy for you to determine the theoretical yield value of the chemical reaction in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Angular Resolution Calculator | Free Calculator to find Angular Resolution" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Angular Resolution Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock meta %}
+
+{% block content %}
+{% if  a and d and c %}
+<script>
+    $(document).ready(function () {
+
+        $("#hassle").click();
+
+
+    });
+
+
+</script>
+
+<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+{% endif %}
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Capacitance Calculator</h1>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="{% url 'capacitance' %}" method="POST" id="my_form">
+                {% csrf_token %}
+                 <div class="input-group mb-3">
+                      
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Choose Option</span>
+        </div>
+    
+  
+       <select id="Given" name="Given"  style="margin-top: 5px;width:100%" class="select form-control" id="inlineFormInputGroup" onchange="this.form.submit()">
+          
+          
+            {% if Given == 'form1' %}
+            <option value='form1' selected="selected">Find Capacitance | Using Area and Separation Distance</option>  
+            {% else %}
+            <option value='form1' >Find Capacitance | Using Area and Separation Distance</option>  
+            {% endif %}
+
+            {% if Given == 'form2' %}
+            <option value='form2' selected="selected">Find Separation Distance | Using Area and Capacitance</option>  
+            {% else %}
+            <option value='form2' >Find Separation Distance | Using Area and Capacitance</option>  
+            {% endif %}
+
+            {% if Given == 'form3' %}
+            <option value='form3' selected="selected">Find Area | Using Separation Distance and Capacitance</option>  
+            {% else %}
+            <option value='form3' >Find Area | Using Separation Distance and Capacitance</option>  
+            {% endif %}            
+          </select>                     
+      </div>
+       
+
+          {% if Given != "form2" %}
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"> Separation Distance</span>
+            </div>
+            <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                            {% if d_op == 'm' %}
+                            <option value="m" selected="selected">meters (m)</option>
+                            {% else %}
+                            <option value="m">meters (m)</option>
+                            {% endif %}
+
+                            {% if d_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeters (cm)</option>
+                            {% else %}
+                            <option value="cm">centimeters (cm)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mm' %}
+                            <option value="mm" selected="selected">millimeters (mm)</option>
+                            {% else %}
+                            <option value="mm">millimeters (mm)</option>
+                            {% endif %}
+                            
+                            {% if d_op == 'in' %}
+                            <option value="in" selected="selected">inches (in)</option>
+                            {% else %}
+                            <option value="in">inches (in)</option>
+                            {% endif %}
+
+                            {% if d_op == 'ft' %}
+                            <option value="ft" selected="selected">feets (ft)</option>
+                            {% else %}
+                            <option value="ft">feets (ft)</option>
+                            {% endif %}
+
+                            {% if d_op == 'yd' %}
+                            <option value="yd" selected="selected">yards (yd)</option>
+                            {% else %}
+                            <option value="yd">yards (yd)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mi' %}
+                            <option value="mi" selected="selected">miles (mi)</option>
+                            {% else %}
+                            <option value="mi">miles (mi)</option>
+                            {% endif %}
+                        </select> 
+              
+            </select>
+          </div> 
+
+          {% endif %}         
+        
+          {% if Given != "form3" %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Area</span>
+            </div>
+            
+           <input style="margin-top: 5px;width:100%" id="a" name="a" value="{{a}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+                        <select class="select form-control" id="inlineFormInputGroup" name="a_op">
+                            {% if a_op == 'mm' %}
+                            <option value="mm" selected="selected">square millimeters (mm²) </option>
+                            {% else %}
+                            <option value="mm">square millimeters (mm²) </option>
+                            {% endif %}
+
+                            {% if a_op == 'm' %}
+                            <option value="m" selected="selected">square meters(m²)</option>
+                            {% else %}
+                            <option value="m">square meters(m²)</option>
+                            {% endif %}
+
+                            {% if a_op == 'cm' %}
+                            <option value="cm" selected="selected">square centimeters(m²)</option>
+                            {% else %}
+                            <option value="cm">square centimeters(cm²)</option>
+                            {% endif %}
+
+                            {% if a_op == 'in' %}
+                            <option value="in" selected="selected">square inches(in²)</option>
+                            {% else %}
+                            <option value="in">square inches(in²)</option>
+                            {% endif %}
+
+                            {% if a_op == 'ft' %}
+                            <option value="ft" selected="selected">square feets(ft²)</option>
+                            {% else %}
+                            <option value="ft">square feets(ft²)</option>
+                            {% endif %}
+
+                            {% if a_op == 'yd' %}
+                            <option value="yd" selected="selected">square yards(yd²)</option>
+                            {% else %}
+                            <option value="yd">square yards(yd²)</option>
+                            {% endif %}
+                        </select> 
+          </div>
+          {% endif %}        
+        
+          {% if Given != "form1"  %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Capacitance</span>
+              </div>
+              <input style="margin-top: 5px;width:100%" id="c" name="c" value="{{c}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <select class="select form-control" id="inlineFormInputGroup" name="c_op">
+                            {% if c_op == 'f' %}
+                            <option value="f" selected="selected">farads(f)</option>
+                            {% else %}
+                            <option value="f">farads(f)</option>
+                            {% endif %}
+                            {% if c_op == 'mf' %}
+                            <option value="mf" selected="selected">milifarad (mf)</option>
+                            {% else %}
+                            <option value="mf">milifarad (mf)</option>
+                            {% endif %}
+                            {% if c_op == 'uf' %}
+                            <option value="uf" selected="selected">microfarads (uf)</option>
+                            {% else %}
+                            <option value="uf">microfarads (uf)</option>
+                            {% endif %}
+                            {% if c_op == 'nf' %}
+                            <option value="nf" selected="selected">nanofarads (nf)</option>
+                            {% else %}
+                            <option value="nf">nanofarads (nf)</option>
+                            {% endif %}
+                            {% if c_op == 'pf' %}
+                            <option value="pf" selected="selected">picofarads (pf)</option>
+                            {% else %}
+                            <option value="pf">picofarads (pf)</option>
+                            {% endif %}
+                       </select> 
+                        </div>
+            {% endif %}        
+        
+          <div class=" center col mt-2 ">
+            <center><button type="submit" class="btn btn-primary">Calculate</button>
+              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
+            </center>
+          </div>
+</form>
+
+  </div>
+    </div>
+</div>
+</div>
+
+
+<div id="clear">
+<div class="container" style="height: auto !important;">
+    {% if Given == "form1" and d and a %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Capacitance:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Capacitance:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Capacitance Formula C = εA/s</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>C is the capacitance. It is measured in farads(f),</li>
+                        <li>ε is the dielectric permittivity (a measure of resistance) in farads per meter,</li>
+                        <li>A is the area where the plates overlap.</li>
+                        <li>S is the separation distance between the plates..</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>A = {{a}} {{a_op}}²</p>
+            <p>S = {{d}} {{d_op}}</p>
+
+            {% if a_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"Square Meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Sqaure Meter  = Area(A) / 1000000</p>
+            </details>
+            <p>A = {{am}} m<sup>2</sup></p>
+            {% elif a_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"Square Meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Sqaure Meter  = Area(A) / 10000</p>
+            </details>
+            <p>A = {{am}} m<sup>2</sup></p>
+            {% elif a_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Area {{a}} <b> "{{a_op}}²"  </b> to
+                <b>"Square Meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Square Meter  = Area(A) / 1550</p>
+            </details>
+            <p>A = {{am}} m<sup>2</sup></p>
+            {% elif a_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"Square meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Square Meter  = Area(A) / 10.764</p>
+            </details>
+            <p>A = {{am}} m<sup>2</sup></p>
+            {% elif a_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"Sqaure meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Square Meter  = Area(A) / 1.196</p>
+            </details>
+            <p>A = {{am}} m<sup>2</sup></p>
+            {% endif %}
+            
+            
+            {% if d_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) * 100.0</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 1000</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 39.37</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 1.094</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 3.28084</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{sr}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) * 1609</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% endif %}
+            
+            <strong>Put values into formula</strong>
+
+
+            <p>Capacitance = {{e}} * 10<sup>-12</sup> * {{a}} / {{d}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Capacitance = {{result}} F </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+    {% endif %}
+     {% if Given == "form2" and a and c %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Separation Distance:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Area:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Separation Distance Formula S= ϵ * A / C</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>C is the capacitance. It is measured in farads(f),</li>
+                        <li>ε is the dielectric permittivity (a measure of resistance) in farads per meter,</li>
+                        <li>A is the area where the plates overlap.</li>
+                        <li>S is the separation distance between the plates..</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>C = {{c}} {{c_op}}</p>
+            <p>A = {{a}} {{a_op}}²</p>
+
+            {% if c_op == 'mf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad = Capacitance(a) / 1000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'uf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad = Capacitance(a) / 1000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'nf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Capacitance {{a}} <b> "{{c_op}}"  </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad  = Capacitance(a) / 1000000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'pf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad  = Capacitance(a) / 1000000000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% endif %}
+
+            {% if a_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Area(a) / 0.000001 </p>
+            </details>
+            <p>A = {{am}} m²</p>
+            {% elif a_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Area(a) / 1550</p>
+            </details>
+            <p>A = {{am}} m²</p>
+            {% elif a_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Area(a) / 1.196</p>
+            </details>
+            <p>A = {{am}} m²</p>
+            {% elif a_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Area(a) / 10000</p>
+            </details>
+            <p>A = {{am}} m²</p>
+            {% elif a_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Area(a) / 10.764</p>
+            </details>
+            <p>A = {{am}} m²</p>
+            {% endif %}
+            
+
+            <strong>Put values into formula</strong>
+
+
+            <p>Separation Distance = {{e}} * 10<sup>-12</sup> * {{am}} / {{cm}}</p>
+            
+            <center><b id="formula" style="font-size:25px;">Separation Distance = {{result}} m </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+</div>
+</div>
+    {% endif %}
+
+        {% if Given == "form3" and d and c %}
+    
+    <div class="card c1">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Area:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Area:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Area Formula  A=S*C/ϵ</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>C is the capacitance. It is measured in farads(f),</li>
+                        <li>ε is the dielectric permittivity (a measure of resistance) in farads per meter,</li>
+                        <li>A is the area where the plates overlap.</li>
+                        <li>S is the separation distance between the plates..</li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>C = {{c}} {{c_op}}</p>
+            <p>S = {{d}} {{d_op}}</p>
+
+            {% if c_op == 'mf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad = Capacitance(c) / 1000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'uf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad = Capacitance(c) / 1000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'nf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Capacitance {{c}} <b> "{{c_op}}"  </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad  = Capacitance(c) / 1000000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% elif c_op == 'pf' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
+                <b>"Farad "</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Farad  = Capacitance(c) / 1000000000000</p>
+            </details>
+            <p>C = {{cm}} F</p>
+            {% endif %}
+
+            {% if d_op == 'cm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) * 100.0</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'mm' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 1000</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'in' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 39.37</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'yd' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 1.094</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'ft' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) / 3.28084</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% elif d_op == 'mi' %}
+            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{sr}} <b> "{{d_op}}" </b> to
+                <b>"meter"</b></b>
+                <details>
+            <summary>Conversion Formula:</summary>
+            <p>Meter  = Separation Distance(s) * 1609</p>
+            </details>
+            <p>S = {{dm}} m</p>
+            {% endif %}
+            
+
+            <strong>Put values into formula</strong>
+
+
+            <p>Area = {{dm}} * {{cm}}/ {{e}} * 10<sup>-12</ssup></p>
+            
+            <center><b id="formula" style="font-size:25px;">Area = {{result}} m<sup>2</sup> </b></center>
+            <details>
+            <summary>All conversion here:</summary>
+            <p><table style="width:100%">
+             <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                </tr>
+            {% for u,v in redict.items %}
+                  <tr>
+                    <td>{{u}}<sup>2</sup></td>
+                    <td>{{v}}</td>
+                  </tr>
+            {% endfor %}
+            </table></p>
+            </details>
+   </div>
+    </div>
+</div>
+</div>
+    {% endif %}
+    </div>
+</div>
+{% endblock content %}
