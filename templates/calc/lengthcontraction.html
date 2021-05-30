@@ -62,7 +62,7 @@
 {%endblock meta %}
 
 {% block content %}
-{% if  v and l and sr %}
+{% if  v and l or l and sr or sr and v%}
 <script>
     $(document).ready(function () {
 
@@ -74,7 +74,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
 {% endif %}
 
 
@@ -263,8 +263,8 @@
         
           <div class=" center col mt-2 ">
             <center><button type="submit" class="btn btn-primary">Calculate</button>
-              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
-            </center>
+                            <a href="{% url 'lc' %}" class="btn btn-warning" role="button" style="margin-top:5px;">Reset</a>
+                            </center>
           </div>
 </form>
 
@@ -276,7 +276,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and l and v %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Special Relativity:</h2>
         </div>
@@ -304,98 +304,110 @@
 
             
             {% if l_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Length(L)  = Length(L) * 100.0 m</p>
+            <p>Length(L)  = {{l}} * 100.0 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+            
+
             {% elif l_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Kilometers = 1000 Meters</p>
+            <p>Length(L)  = Length(L) * 1000 m</p>
+            <p>Length(L)  = {{l}} * 1000 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+        
             {% elif l_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Millimeters = 0.001 Meters</p>
+            <p>Length(L)  = Length(L) / 1000 m</p>
+            <p>Length(L)  = {{l}} / 1000 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+          
             {% elif l_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 39.37</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Length(L)  = Length(L) / 39.37 m</p>
+            <p>Length(L)  = {{l}} / 39.37 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+            
             {% elif l_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Length(L)  = Length(L) / 1.094 m</p>
+            <p>Length(L)  = {{l}} / 1.094 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+            
             {% elif l_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Length(L)  = Length(L) / 3.28084 m</p>
+            <p>Length(L)  = {{l}} / 3.28084 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+
             {% elif l_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{sr}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Length(L)  = Length(L) * 1609 m</p>
+            <p>Length(L)  = {{l}} * 1609 m</p>
+            <p>Length(L) = {{lm}} m</p>
             </details>
-            <p>L = {{lm}} m</p>
+
             {% endif %}
+            <br>
 
 
             
             {% if v_op == 'km/s' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 1000</p>
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 Kilometer per second = 1000 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 1000 m/s</p>
+            <p>Velocity(V)  = {{v}} * 1000 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
             </details>
-            <p>V = {{vm}} m/s</p>
+            
             {% elif v_op == 'mi/s' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 1609</p>
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 Miles per second = 1609 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 1609 m/s</p>
+            <p>Velocity(V)  = {{v}} * 1609 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
             </details>
-            <p>V = {{vm}} m/s</p>
+          
             {% elif v_op == 'c' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Velocity {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 299 792 458</p>
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 ligth speed = 299 792 458 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 299 792 458 m/s</p>
+            <p>Velocity(V)  = {{v}} * 299 792 458 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
             </details>
-            <p>V = {{vm}} m/s</p>
+        
             {% endif %}
           
-            <strong>Put values into formula</strong>
+            <p><b>Put values into formula</b></p>
 
 
             <p>Special relativity = {{lm}} * {{y}}</p>
             
-            <center><b id="formula" style="font-size:25px;">Special Relativity = {{result}}  m </b></center>
-            <details>
+            <b>Special Relativity = {{result}}  m </b>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
@@ -418,7 +430,7 @@
 </div>
     {% endif %}
     {% if Given == "form2" and l and sr %}
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Velocity:</h2>
         </div>
@@ -445,128 +457,145 @@
             
 
             {% if sr_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Kilometer = 1000 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 1000 m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 1000 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 CentiMeter = 0.01 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 100 m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 100 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 MilliMeter = 0.001 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1000 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1000 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+        
             {% elif sr_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 39.37</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Inches = 0.0254 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 39.37 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 39.37 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Yard = 0.9144 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1.094 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1.094 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Feet = 0.3048 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 3.28084 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 3.28084 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Special Relativity {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Miles = 1609.34 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1609 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1609 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
             {% endif %}
-
-            {% if l_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1000</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 100.0</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1000</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 39.37</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 1.094</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) / 3.28084</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% elif l_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Length {{l}} <b> "{{l_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Length(L) * 1609</p>
-            </details>
-            <p>L = {{lm}} m</p>
-            {% endif %}
+            <br>
 
            
+            {% if l_op == 'cm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Length(L)  = Length(L) * 100.0 m</p>
+            <p>Length(L)  = {{l}} * 100.0 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+            
+
+            {% elif l_op == 'km' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Kilometers = 1000 Meters</p>
+            <p>Length(L)  = Length(L) * 1000 m</p>
+            <p>Length(L)  = {{l}} * 1000 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+        
+            {% elif l_op == 'mm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Millimeters = 0.001 Meters</p>
+            <p>Length(L)  = Length(L) / 1000 m</p>
+            <p>Length(L)  = {{l}} / 1000 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
           
-            <strong>Put values into formula</strong>
+            {% elif l_op == 'in' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Length(L)  = Length(L) / 39.37 m</p>
+            <p>Length(L)  = {{l}} / 39.37 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+            
+            {% elif l_op == 'yd' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Length(L)  = Length(L) / 1.094 m</p>
+            <p>Length(L)  = {{l}} / 1.094 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+            
+            {% elif l_op == 'ft' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Length(L)  = Length(L) / 3.28084 m</p>
+            <p>Length(L)  = {{l}} / 3.28084 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+
+            {% elif l_op == 'mi' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Length(L)  = Length(L) * 1609 m</p>
+            <p>Length(L)  = {{l}} * 1609 m</p>
+            <p>Length(L) = {{lm}} m</p>
+            </details>
+
+            {% endif %}
+            <br>
+           
+          
+            <p><b>Put values into formula</b></p>
             <p>Velocity = {{srm}} / {{lm}}</p>
             
-            <center><b id="formula" style="font-size:25px;">Velocity = {{result}} m/s</b></center>
-            <details>
+            <b>Velocity = {{result}} m/s</b>
+
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
@@ -585,7 +614,7 @@
 </div>
     {% endif %}
         {% if Given == "form3" and sr and v %}
-        <div class="card c1">
+        <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Length:</h2>
         </div>
@@ -613,97 +642,111 @@
 
             
         
+            
             {% if sr_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) * 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Kilometer = 1000 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 1000 m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 1000 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 CentiMeter = 0.01 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 100 m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 100 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) / 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 MilliMeter = 0.001 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1000 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1000 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+        
             {% elif sr_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) / 39.37</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Inches = 0.0254 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 39.37 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 39.37 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Yard = 0.9144 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1.094 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1.094 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Feet = 0.3048 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 3.28084 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 3.28084 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
+            
             {% elif sr_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{sr}} <b> "{{sr_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Special Relativity(SR) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
+            <p>1 Miles = 1609.34 meter</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) / 1609 m</p>
+            <p>Special Relativity(sr)  = {{sr}} / 1609 m</p>
+            <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
-            <p>SR = {{srm}} m</p>
             {% endif %}
+            <br>
 
 
+            
+
+            
             {% if v_op == 'km/s' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 1000</p>
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 Kilometer per second = 1000 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 1000 m/s</p>
+            <p>Velocity(V)  = {{v}} * 1000 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
             </details>
-            <p>V = {{vm}} m/s</p>
+            
             {% elif v_op == 'mi/s' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 1609</p>
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 Miles per second = 1609 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 1609 m/s</p>
+            <p>Velocity(V)  = {{v}} * 1609 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
             </details>
-            <p>V = {{vm}} m/s</p>
-            {% elif v_op == 'c' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Relative Length {{v}} <b> "{{v_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter/s  = Velocity(V) * 299 792 458</p>
-            </details>
-            <p>V = {{vm}} m/s</p>
-            {% endif %}
-           
           
-            <strong>Put values into formula</strong>
+            {% elif v_op == 'c' %}
+            <details class="border border-primary">
+            <summary>Convert the Velocity {{v}} "{{v_op}}" to "m/s"</b></summary>
+            <p>1 ligth speed = 299 792 458 Meter per second</p>
+            <p>Velocity(V)  = Velocity(V) * 299 792 458 m/s</p>
+            <p>Velocity(V)  = {{v}} * 299 792 458 m/s</p>
+            <p>Velocity(V) = {{vm}} m/s</p>
+            </details>
+        
+            {% endif %}
+          
+            <p><b>Put values into formula</b></p>
             <p>Velocity = {{srm}} / √(1 - ({{vm}})<sup>2</sup> / (299792458)<sup>2</sup>)</p>
             
-            <center><b id="formula" style="font-size:25px;">Velocity = {{result}} meter</b></center>
-            <details>
+            <b>Velocity = {{result}} meter</b>
+
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>

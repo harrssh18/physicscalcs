@@ -62,21 +62,17 @@
 {%endblock meta %}
 
 {% block content %}
-{% if  a and d and c %}
+{% if a and d or a and c or c and a %}
 <script>
-    $(document).ready(function () {
-
+    $(document).ready(function(){
         $("#hassle").click();
-
-
     });
 
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
 {% endif %}
-
 
 <div class="container" style="height: auto !important;">
     <div class="card c1">
@@ -265,8 +261,8 @@
         
           <div class=" center col mt-2 ">
             <center><button type="submit" class="btn btn-primary">Calculate</button>
-              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
-            </center>
+                            <a href="{% url 'capacitance' %}" class="btn btn-warning" role="button" style="margin-top:5px;">Reset</a>
+                            </center>
           </div>
 </form>
 
@@ -280,7 +276,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and d and a %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Capacitance:</h2>
         </div>
@@ -304,106 +300,120 @@
             <p>A = {{a}} {{a_op}}²</p>
             <p>S = {{d}} {{d_op}}</p>
 
-            {% if a_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"Square Meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Sqaure Meter  = Area(A) / 1000000</p>
+             {% if a_op == 'mm' %}
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 MilliMeter² = 10<sup>-6</sup> Meter²</p>
+            <p>Area(a) = Area(a) / 0.000001 m²</p>
+            <p>Area(a) = {{a}} / 0.000001 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m<sup>2</sup></p>
-            {% elif a_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"Square Meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Sqaure Meter  = Area(A) / 10000</p>
-            </details>
-            <p>A = {{am}} m<sup>2</sup></p>
-            {% elif a_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Area {{a}} <b> "{{a_op}}²"  </b> to
-                <b>"Square Meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Square Meter  = Area(A) / 1550</p>
-            </details>
-            <p>A = {{am}} m<sup>2</sup></p>
-            {% elif a_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"Square meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Square Meter  = Area(A) / 10.764</p>
-            </details>
-            <p>A = {{am}} m<sup>2</sup></p>
-            {% elif a_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"Sqaure meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Square Meter  = Area(A) / 1.196</p>
-            </details>
-            <p>A = {{am}} m<sup>2</sup></p>
-            {% endif %}
             
+            {% elif a_op == 'in' %}
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Inches² = 0.00064516 Meter²</p>
+            <p>Area(a) = Area(a) / 1550 m²</p>
+            <p>Area(a) = {{a}} / 1550 m²</p>
+            <p>Area(a) = {{am}} m²</p>
+            </details>
+            
+            {% elif a_op == 'yd' %}
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Yard² = 0.836127 Meter²</p>
+            <p>Area(a) = Area(a) / 1.196 m²</p>
+            <p>Area(a) = {{a}} / 1.196 m²</p>
+            <p>Area(a) = {{am}} m²</p>
+            </details>
+            
+            {% elif a_op == 'cm' %}
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 CentiMeter² = 0.0001 Meter²</p>
+            <p>Area(a) = Area(a) / 10000 m²</p>
+            <p>Area(a) = {{a}} / 10000 m²</p>
+            <p>Area(a) = {{am}} m²</p>
+            </details>
+
+            {% elif a_op == 'ft' %}
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Feet² = 0.02903 Meter²</p>
+            <p>Area(a) = Area(a) / 10.764 m²</p>
+            <p>Area(a) = {{a}} / 10.764 m²</p>
+            <p>Area(a) = {{am}} m²</p>
+            </details>
+            {% endif %}
+            <br>
             
             {% if d_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 100.0</p>
+            <p>Separation Distance(s)  = {{d}} * 100.0</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 1000</p>
-            </details>
-            <p>S = {{dm}} m</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Millimeter = 0.001 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 1000</p>
+            <p>Separation Distance(s)  = {{d}} / 1000</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
+        </details>
+        
+
             {% elif d_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 39.37</p>
-            </details>
-            <p>S = {{dm}} m</p>
+            <b><details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 39.37</p>
+            <p>Separation Distance(s)  = {{d}} / 39.37</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
+        </details></b>
+            
+            
             {% elif d_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 1.094</p>
+            <p>Separation Distance(s)  = {{d}} / 1.094</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 3.28084</p>
+            <p>Separation Distance(s)  = {{d}} / 3.28084</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{sr}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 1609</p>
+            <p>Separation Distance(s)  = {{d}} * 1609</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
             {% endif %}
             
-            <strong>Put values into formula</strong>
+            <b><p>Put values into formula</p></b>
 
 
             <p>Capacitance = {{e}} * 10<sup>-12</sup> * {{a}} / {{d}}</p>
             
-            <center><b id="formula" style="font-size:25px;">Capacitance = {{result}} F </b></center>
-            <details>
+            <p><b>Capacitance = {{result}} F </b></p>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
@@ -423,7 +433,7 @@
     {% endif %}
      {% if Given == "form2" and a and c %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Separation Distance:</h2>
         </div>
@@ -448,89 +458,99 @@
             <p>A = {{a}} {{a_op}}²</p>
 
             {% if c_op == 'mf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad = Capacitance(a) / 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 MilliFarad = 0.001 Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+            
+            
             {% elif c_op == 'uf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad = Capacitance(a) / 1000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 MicroFarad = 0.000001 Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+
             {% elif c_op == 'nf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Capacitance {{a}} <b> "{{c_op}}"  </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad  = Capacitance(a) / 1000000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 NanoFarad = 10<sup>-9</sup> Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+            
+
             {% elif c_op == 'pf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{a}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad  = Capacitance(a) / 1000000000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 NanoFarad = 10<sup>-12</sup> Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
             {% endif %}
+            <br>
 
             {% if a_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Area(a) / 0.000001 </p>
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 MilliMeter² = 10<sup>-6</sup> Meter²</p>
+            <p>Area(a) = Area(a) / 0.000001 m²</p>
+            <p>Area(a) = {{a}} / 0.000001 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m²</p>
+            
             {% elif a_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Area(a) / 1550</p>
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Inches² = 0.00064516 Meter²</p>
+            <p>Area(a) = Area(a) / 1550 m²</p>
+            <p>Area(a) = {{a}} / 1550 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m²</p>
+            
             {% elif a_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Area(a) / 1.196</p>
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Yard² = 0.836127 Meter²</p>
+            <p>Area(a) = Area(a) / 1.196 m²</p>
+            <p>Area(a) = {{a}} / 1.196 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m²</p>
+            
             {% elif a_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Area(a) / 10000</p>
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 CentiMeter² = 0.0001 Meter²</p>
+            <p>Area(a) = Area(a) / 10000 m²</p>
+            <p>Area(a) = {{a}} / 10000 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m²</p>
+
             {% elif a_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Area {{a}} <b> "{{a_op}}²" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Area(a) / 10.764</p>
+            <details class="border border-primary">
+            <summary><b> Convert the Area {{a}} "{{a_op}}²" to "meter²"</b></summary>
+            <p>1 Feet² = 0.02903 Meter²</p>
+            <p>Area(a) = Area(a) / 10.764 m²</p>
+            <p>Area(a) = {{a}} / 10.764 m²</p>
+            <p>Area(a) = {{am}} m²</p>
             </details>
-            <p>A = {{am}} m²</p>
             {% endif %}
             
 
-            <strong>Put values into formula</strong>
+            <p><b>Put values into formula</b></p>
 
 
             <p>Separation Distance = {{e}} * 10<sup>-12</sup> * {{am}} / {{cm}}</p>
             
-            <center><b id="formula" style="font-size:25px;">Separation Distance = {{result}} m </b></center>
-            <details>
+            <p><b>Separation Distance = {{result}} m </b></p>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
@@ -553,7 +573,7 @@
 
         {% if Given == "form3" and d and c %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Area:</h2>
         </div>
@@ -578,97 +598,112 @@
             <p>S = {{d}} {{d_op}}</p>
 
             {% if c_op == 'mf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad = Capacitance(c) / 1000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 MilliFarad = 0.001 Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+            
+            
             {% elif c_op == 'uf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad = Capacitance(c) / 1000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 MicroFarad = 0.000001 Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+
             {% elif c_op == 'nf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert Capacitance {{c}} <b> "{{c_op}}"  </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad  = Capacitance(c) / 1000000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 NanoFarad = 10<sup>-9</sup> Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
+            
+
             {% elif c_op == 'pf' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Capacitance {{c}} <b> "{{c_op}}" </b> to
-                <b>"Farad "</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Farad  = Capacitance(c) / 1000000000000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
+            <p>1 NanoFarad = 10<sup>-12</sup> Farad</p>
+            <p>Capacitance(c) = Capacitance(c) / 1000000000000 F</p>
+            <p>Capacitance(c) = {{c}} / 1000000000000 F</p>  
+            <p>Capacitance(c) = {{cm}} F</p>
             </details>
-            <p>C = {{cm}} F</p>
             {% endif %}
-
+            <br>
+            
             {% if d_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 100.0</p>
+            <p>Separation Distance(s)  = {{d}} * 100.0</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 1000</p>
-            </details>
-            <p>S = {{dm}} m</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Millimeter = 0.001 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 1000</p>
+            <p>Separation Distance(s)  = {{d}} / 1000</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
+        </details>
+        
+
             {% elif d_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 39.37</p>
-            </details>
-            <p>S = {{dm}} m</p>
+            <b><details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 39.37</p>
+            <p>Separation Distance(s)  = {{d}} / 39.37</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
+        </details></b>
+            
+            
             {% elif d_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 1.094</p>
+            <p>Separation Distance(s)  = {{d}} / 1.094</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 3.28084</p>
+            <p>Separation Distance(s)  = {{d}} / 3.28084</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
+            
+            
             {% elif d_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Separation Distance {{sr}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Separation Distance(s) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 1609</p>
+            <p>Separation Distance(s)  = {{d}} * 1609</p>
+            <p>Separation Distance(s) = {{dm}} m</p>
             </details>
-            <p>S = {{dm}} m</p>
             {% endif %}
             
 
-            <strong>Put values into formula</strong>
+            <b><p>Put values into formula</p></b>
 
-
-            <p>Area = {{dm}} * {{cm}}/ {{e}} * 10<sup>-12</ssup></p>
+            <p>Area = {{dm}} * {{cm}}/ {{e}} * 10<sup>-12</sup></p>
             
-            <center><b id="formula" style="font-size:25px;">Area = {{result}} m<sup>2</sup> </b></center>
-            <details>
+            <p><b id="formula">Area = {{result}} m<sup>2</sup> </b></p>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>

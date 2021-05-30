@@ -62,7 +62,7 @@
 {%endblock meta %}
 
 {% block content %}
-{% if  tc and t and q and d%}
+{% if  tc and t and d or tc and t and q or tc and d and q or t and d and q %}
 <script>
     $(document).ready(function () {
 
@@ -74,7 +74,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
 {% endif %}
 
 
@@ -274,7 +274,7 @@
         
           <div class=" center col mt-2 ">
             <center><button type="submit" class="btn btn-primary">Calculate</button>
-              <a href="{% url 'home' %}" class="btn btn-warning">Reset</a>                
+              <a href="{% url 'capacitance' %}" class="btn btn-warning" role="button" style="margin-top:5px;">Reset</a>
             </center>
           </div>
 </form>
@@ -287,7 +287,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and tc and t and d %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Heat Flux (q):</h2>
         </div>
@@ -314,129 +314,147 @@
 
             
             
+        
             {% if d_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 100.0</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 100.0 m</p>
+            <p>Distance(Δx)  = {{d}} * 100.0 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 1000.0</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1000</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 39.37</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1.094</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 3.28084</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) * 1609</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% endif %}
 
+            {% elif d_op == 'km' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Kilometer = 1000 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>            
+            
+            {% elif d_op == 'mm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Millimeter = 0.001 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>
+        
+
+            {% elif d_op == 'in' %}
+            <b><details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 39.37 m</p>
+            <p>Distance(Δx)  = {{d}} / 39.37 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details></b>
+            
+            
+            {% elif d_op == 'yd' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1.094 m</p>
+            <p>Distance(Δx)  = {{d}} / 1.094 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            
+            
+            {% elif d_op == 'ft' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 3.28084 m</p>
+            <p>Distance(Δx)  = {{d}} / 3.28084 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            
+            
+            {% elif d_op == 'mi' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 1609 m</p>
+            <p>Distance(Δx)  = {{d}} * 1609 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            {% endif %}
+            <br>
 
             {% if t_op == 'k' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Kelvin = -273 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+            
             {% elif t_op == 'f' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Fahrenheit = -17.22 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT) -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+           
             {% elif t_op == 'r' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Rankine = -272.5 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT)- 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} - 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+            
             {% elif t_op == 'de' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Delisle = 99.33 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - Temperature Difference (ΔT) * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - {{t}} * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+            
             {% elif t_op == 'n' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Newton = 3.03 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °</p>
+            
             {% elif t_op == 're' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Reaumer = 1.25 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+            
             {% elif t_op == 'ro' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Romer = -12.38 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
+            
             {% endif %}   
             
-            <strong>Put values into formula</strong>
+            <p><b>Put values into formula</b></p>
 
 
             <p>Heat Flux (q) = - {{tc}} * {{tm}} / {{dm}} M/w²</p>
             
-            <center><b id="formula" style="font-size:25px;">Heat Flux (q) = {{result}} M/w² </b></center>
+            <b>Heat Flux (q) = {{result}} M/w² </b>
             
    </div>
     </div>
@@ -444,7 +462,7 @@
 
     {% if Given == "form2" and tc and t and q %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Distance (Δx):</h2>
         </div>
@@ -472,70 +490,77 @@
             
             
             {% if t_op == 'k' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Kelvin = -273 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
             </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'f' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'r' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'de' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'n' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
-            </details>
-            <p>ΔT = {{tm}} °</p>
-            {% elif t_op == 're' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'ro' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% endif %}   
             
-            <strong>Put values into formula</strong>
+            {% elif t_op == 'f' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Fahrenheit = -17.22 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT) -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+           
+            {% elif t_op == 'r' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Rankine = -272.5 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT)- 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} - 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'de' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Delisle = 99.33 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - Temperature Difference (ΔT) * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - {{t}} * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'n' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Newton = 3.03 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 're' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Reaumer = 1.25 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'ro' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Romer = -12.38 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% endif %}     
+            
+            <p><b>Put values into formula</b></p>
 
 
             <p>Distance (Δx) = - {{tc}} * {{tm}} / {{q}} m</p>
             
-            <center><b id="formula" style="font-size:25px;">Distance (Δx) = {{result}} m </b></center>
-            <details>
+           <b>Distance (Δx) = {{result}} m </b>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
@@ -557,7 +582,7 @@
 
     {% if Given == "form3" and q and t and d %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Thermal conductivity constant (λ):</h2>
         </div>
@@ -584,136 +609,155 @@
 
             
             
-            {% if d_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 100.0</p>
+         {% if d_op == 'cm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 100.0 m</p>
+            <p>Distance(Δx)  = {{d}} * 100.0 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
+
             {% elif d_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 1000.0</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1000</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 39.37</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1.094</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 3.28084</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% elif d_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) * 1609</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
-            {% endif %}
-
-            {% if t_op == 'k' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Temperature Difference {{t}} <b> "{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  =  Temperature Difference (ΔT) - 273.15 </p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'f' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT) -32) * 5/9</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'r' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = ( Temperature Difference (ΔT)- 491.67) * 5/9</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'de' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = 100 - Temperature Difference (ΔT) * 2 / 3</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'n' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) / 0.33000</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 're' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) * 5/4</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% elif t_op == 'ro' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the  Temperature Difference {{t}} <b> "°{{t_op}}" </b> to
-                <b>"Celsius"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p> Celsius  = Temperature Difference (ΔT) - 7.5 / 0.52500</p>
-            </details>
-            <p>ΔT = {{tm}} °C</p>
-            {% endif %}         
-
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Kilometer = 1000 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>            
             
-            <strong>Put values into formula</strong>
+            {% elif d_op == 'mm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Millimeter = 0.001 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>
+        
+
+            {% elif d_op == 'in' %}
+            <b><details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 39.37 m</p>
+            <p>Distance(Δx)  = {{d}} / 39.37 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details></b>
+            
+            
+            {% elif d_op == 'yd' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1.094 m</p>
+            <p>Distance(Δx)  = {{d}} / 1.094 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            
+            
+            {% elif d_op == 'ft' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 3.28084 m</p>
+            <p>Distance(Δx)  = {{d}} / 3.28084 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            
+            
+            {% elif d_op == 'mi' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 1609 m</p>
+            <p>Distance(Δx)  = {{d}} * 1609 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+            </details>
+            {% endif %}
+            <br>
+
+           
+            
+            {% if t_op == 'k' %}
+            <details class="border border-primary">
+            <summary>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</summary>
+            <p>1 Kelvin = -273 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 273.15 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'f' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Fahrenheit = -17.22 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT) -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} -32) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+           
+            {% elif t_op == 'r' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Rankine = -272.5 °C</p>
+            <p>Temperature Difference (ΔT) = ( Temperature Difference (ΔT)- 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = ( {{t}} - 491.67) * 5/9 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'de' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Delisle = 99.33 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - Temperature Difference (ΔT) * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = 100 - {{t}} * 2 / 3 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'n' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Newton = 3.03 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} / 0.33000 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 're' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Reaumer = 1.25 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} * 5/4 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% elif t_op == 'ro' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Temperature Difference {{t}} "{{t_op}}" to "Celsius"</b></summary>
+            <p>1 Romer = -12.38 °C</p>
+            <p>Temperature Difference (ΔT) = Temperature Difference (ΔT) - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{t}} - 7.5 / 0.52500 °C</p>
+            <p>Temperature Difference (ΔT) = {{tm}} °C</p>
+            </details>
+            
+            {% endif %}
+            
+            <p><b>Put values into formula</b></p>
 
 
             <p>Thermal conductivity constant λ = -{{q}} * {{dm}} / {{tm}} M/w²</p>
             
-            <center><b id="formula" style="font-size:25px;">Thermal conductivity constant λ = {{result}} M/(m-K) </b></center>
+            <b>Thermal conductivity constant λ = {{result}} M/(m-K) </b>
             
    </div>
     </div>
     {% endif %}
     {% if Given == "form4" and q and tc and d %}
     
-    <div class="card c1">
+    <div class="card c1" id="output">
         <div class="card-header">
             <h2 class="h2">Steps to Find Temperature Difference (ΔT):</h2>
         </div>
@@ -740,72 +784,84 @@
 
             
             
-            {% if d_op == 'cm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 100.0</p>
+             {% if d_op == 'cm' %}
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Centimeters = 0.01 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 100.0 m</p>
+            <p>Distance(Δx)  = {{d}} * 100.0 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
+
             {% elif d_op == 'km' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(s) * 1000.0</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Kilometer = 1000 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>            
+            
             {% elif d_op == 'mm' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1000</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Millimeter = 0.001 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
+            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details>
+        
+
             {% elif d_op == 'in' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 39.37</p>
-            </details>
-            <p>Δx = {{dm}} m</p>
+            <b><details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Inche = 0.0254 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 39.37 m</p>
+            <p>Distance(Δx)  = {{d}} / 39.37 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
+        </details></b>
+            
+            
             {% elif d_op == 'yd' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 1.094</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Yard = 0.9144 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 1.094 m</p>
+            <p>Distance(Δx)  = {{d}} / 1.094 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
+            
+            
             {% elif d_op == 'ft' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) / 3.28084</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Feet = 0.3048 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) / 3.28084 m</p>
+            <p>Distance(Δx)  = {{d}} / 3.28084 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
+            
+            
             {% elif d_op == 'mi' %}
-            <b id="formula" style="font-size:20px;"><b>⇒</b> Convert the Distance {{d}} <b> "{{d_op}}" </b> to
-                <b>"meter"</b></b>
-                <details>
-            <summary>Conversion Formula:</summary>
-            <p>Meter  = Distance(Δx) * 1609</p>
+            <details class="border border-primary">
+            <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
+            <p>1 Miles = 1609.34 Meters</p>
+            <p>Distance(Δx)  = Distance(Δx) * 1609 m</p>
+            <p>Distance(Δx)  = {{d}} * 1609 m</p>
+            <p>Distance(Δx) = {{dm}} m</p>
             </details>
-            <p>Δx = {{dm}} m</p>
             {% endif %}
+            <br>
+
 
           
-            <strong>Put values into formula</strong>
+            <p><b>Put values into formula</b></p>
 
 
             <p>Temperature Difference ΔT = {{q}} * {{dm}} / -{{tc}}</p>
             
-            <center><b id="formula" style="font-size:25px;">Temperature Difference ΔT = {{result}} °C </b></center>
-            <details>
+            <b>Temperature Difference ΔT = {{result}} °C </b>
+            <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
              <tr>
