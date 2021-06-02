@@ -567,7 +567,7 @@
 
             <strong>Temperature:-</strong>
             <br>
-            <p class="btn btn-outline-secondary active">Initial Temperature Formula it = at + (t-at) * exp(-k*(tp))</p>
+            <p class="btn btn-outline-secondary active">Initial Temperature Formula it = at + (t-at) * <sup>-k*(tp)</sup></p>
             <br>
             <strong>where:</strong>
                     <ul>
@@ -668,7 +668,7 @@
             {% endif %}
 
             <p><b>Put values into formula</b></p>
-            <p>Initial Temperature (it) = {{atc}} + ({{tc}}-{{atc}}) * exp(-{{ks}}*{{tps}})</p>
+            <p>Initial Temperature (it) = {{atc}} + ({{tc}}-{{atc}}) * <sup>-{{ks}}*{{tps}}</sup></p>
             
             <b>Initial Temperature (it) = {{result}} °C </b>
             <details class="border border-primary">
