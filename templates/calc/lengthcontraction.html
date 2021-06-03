@@ -74,7 +74,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#length_contraction'">ans1</button>
 {% endif %}
 
 
@@ -127,7 +127,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Length</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="l" name="l" value="{{l}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="l" name="l" value="{{l}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="l_op">
                             {% if l_op == 'm' %}
                             <option value="m" selected="selected">meter (m)</option>
@@ -182,7 +182,7 @@
                 <span class="input-group-text" id="basic-addon1">Observed Velocity</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="v" name="v" value="{{v}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="v" name="v" value="{{v}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="v_op">
                             {% if v_op == 'm/s' %}
                             <option value="m/s" selected="selected">meter per second(m/s)</option>
@@ -213,7 +213,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Special Relativity</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="sr" name="sr" value="{{sr}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="sr" name="sr" value="{{sr}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="sr_op">
                             {% if sr_op == 'm' %}
                             <option value="m" selected="selected">meter (m)</option>
@@ -276,7 +276,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and l and v %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="length_contraction">
         <div class="card-header">
             <h2 class="h2">Steps to Find Special Relativity:</h2>
         </div>
@@ -430,7 +430,7 @@
 </div>
     {% endif %}
     {% if Given == "form2" and l and sr %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="length_contraction">
         <div class="card-header">
             <h2 class="h2">Steps to Find Velocity:</h2>
         </div>
@@ -460,8 +460,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
             <p>1 Kilometer = 1000 meter</p>
-            <p>Special Relativity(sr)  = Special Relativity(sr) * 1000 m</p>
-            <p>Special Relativity(sr)  = {{sr}} * 1000 m</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 10<sup>3</sup> m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 10<sup>3</sup> m</p>
             <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
             
@@ -536,8 +536,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Length {{l}} "{{l_op}}" to "meter"</b></summary>
             <p>1 Kilometers = 1000 Meters</p>
-            <p>Length(L)  = Length(L) * 1000 m</p>
-            <p>Length(L)  = {{l}} * 1000 m</p>
+            <p>Length(L)  = Length(L) * 10<sup>3</sup> m</p>
+            <p>Length(L)  = {{l}} * 10<sup>3</sup> m</p>
             <p>Length(L) = {{lm}} m</p>
             </details>
         
@@ -614,7 +614,7 @@
 </div>
     {% endif %}
         {% if Given == "form3" and sr and v %}
-        <div class="card c1" id="output">
+        <div class="card c1" id="length_contraction">
         <div class="card-header">
             <h2 class="h2">Steps to Find Length:</h2>
         </div>
@@ -647,8 +647,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Special Relativity {{sr}} "{{sr_op}}" to "meter"</b></summary>
             <p>1 Kilometer = 1000 meter</p>
-            <p>Special Relativity(sr)  = Special Relativity(sr) * 1000 m</p>
-            <p>Special Relativity(sr)  = {{sr}} * 1000 m</p>
+            <p>Special Relativity(sr)  = Special Relativity(sr) * 10<sup>3</sup> m</p>
+            <p>Special Relativity(sr)  = {{sr}} * 10<sup>3</sup> m</p>
             <p>Special Relativity(sr) = {{srm}} m</p>
             </details>
             

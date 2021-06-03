@@ -71,7 +71,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#capacitance'">ans1</button>
 {% endif %}
 
 <div class="container" style="height: auto !important;">
@@ -126,7 +126,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"> Separation Distance</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
                             {% if d_op == 'm' %}
                             <option value="m" selected="selected">meters (m)</option>
@@ -182,7 +182,7 @@
                 <span class="input-group-text" id="basic-addon1">Area</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="a" name="a" value="{{a}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="a" name="a" value="{{a}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="a_op">
                             {% if a_op == 'mm' %}
                             <option value="mm" selected="selected">square millimeters (mm²) </option>
@@ -228,7 +228,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Capacitance</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="c" name="c" value="{{c}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="c" name="c" value="{{c}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="c_op">
                             {% if c_op == 'f' %}
                             <option value="f" selected="selected">farads(f)</option>
@@ -276,7 +276,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and d and a %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="capacitance">
         <div class="card-header">
             <h2 class="h2">Steps to Find Capacitance:</h2>
         </div>
@@ -433,7 +433,7 @@
     {% endif %}
      {% if Given == "form2" and a and c %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="capacitance">
         <div class="card-header">
             <h2 class="h2">Steps to Find Separation Distance:</h2>
         </div>
@@ -461,8 +461,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 MilliFarad = 0.001 Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>3</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>3</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             
@@ -471,8 +471,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 MicroFarad = 0.000001 Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>6</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>6</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
 
@@ -480,8 +480,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 NanoFarad = 10<sup>-9</sup> Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>9</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>9</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             
@@ -490,8 +490,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 NanoFarad = 10<sup>-12</sup> Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>12</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>12</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             {% endif %}
@@ -573,7 +573,7 @@
 
         {% if Given == "form3" and d and c %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="capacitance">
         <div class="card-header">
             <h2 class="h2">Steps to Find Area:</h2>
         </div>
@@ -601,8 +601,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 MilliFarad = 0.001 Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>3</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>3</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             
@@ -611,8 +611,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 MicroFarad = 0.000001 Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>6</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>6</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
 
@@ -620,8 +620,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 NanoFarad = 10<sup>-9</sup> Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>9</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>9</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             
@@ -630,8 +630,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Capacitance {{c}} "{{c_op}}" to "Farad"</b></summary>
             <p>1 NanoFarad = 10<sup>-12</sup> Farad</p>
-            <p>Capacitance(c) = Capacitance(c) / 1000000000000 F</p>
-            <p>Capacitance(c) = {{c}} / 1000000000000 F</p>  
+            <p>Capacitance(c) = Capacitance(c) / 10<sup>12</sup> F</p>
+            <p>Capacitance(c) = {{c}} / 10<sup>12</sup> F</p>  
             <p>Capacitance(c) = {{cm}} F</p>
             </details>
             {% endif %}
@@ -641,8 +641,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Centimeters = 0.01 Meters</p>
-            <p>Separation Distance(s)  = Separation Distance(s) * 100.0</p>
-            <p>Separation Distance(s)  = {{d}} * 100.0</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 100.0 m</p>
+            <p>Separation Distance(s)  = {{d}} * 100.0 m</p>
             <p>Separation Distance(s) = {{dm}} m</p>
             </details>
             
@@ -651,20 +651,20 @@
             <details class="border border-primary">
             <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Millimeter = 0.001 Meters</p>
-            <p>Separation Distance(s)  = Separation Distance(s) / 1000</p>
-            <p>Separation Distance(s)  = {{d}} / 1000</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 10<sup>3</sup> m</p>
+            <p>Separation Distance(s)  = {{d}} / 10<sup>3</sup> m</p>
             <p>Separation Distance(s) = {{dm}} m</p>
         </details>
         
 
             {% elif d_op == 'in' %}
-            <b><details class="border border-primary">
+            <details class="border border-primary">
             <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Inche = 0.0254 Meters</p>
             <p>Separation Distance(s)  = Separation Distance(s) / 39.37</p>
             <p>Separation Distance(s)  = {{d}} / 39.37</p>
             <p>Separation Distance(s) = {{dm}} m</p>
-        </details></b>
+        </details>
             
             
             {% elif d_op == 'yd' %}
@@ -681,8 +681,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Feet = 0.3048 Meters</p>
-            <p>Separation Distance(s)  = Separation Distance(s) / 3.28084</p>
-            <p>Separation Distance(s)  = {{d}} / 3.28084</p>
+            <p>Separation Distance(s)  = Separation Distance(s) / 3.28084 m</p>
+            <p>Separation Distance(s)  = {{d}} / 3.28084 m</p>
             <p>Separation Distance(s) = {{dm}} m</p>
             </details>
             
@@ -691,8 +691,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Separation Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Miles = 1609.34 Meters</p>
-            <p>Separation Distance(s)  = Separation Distance(s) * 1609</p>
-            <p>Separation Distance(s)  = {{d}} * 1609</p>
+            <p>Separation Distance(s)  = Separation Distance(s) * 1609 m</p>
+            <p>Separation Distance(s)  = {{d}} * 1609 m</p>
             <p>Separation Distance(s) = {{dm}} m</p>
             </details>
             {% endif %}

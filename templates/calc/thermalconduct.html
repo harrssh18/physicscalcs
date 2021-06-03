@@ -74,7 +74,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#thermal_conduct'">ans1</button>
 {% endif %}
 
 
@@ -136,7 +136,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Heat Flux (q)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="q" name="q" value="{{q}}"  required="" class="form-control" type="text" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="q" name="q" value="{{q}}"  required="" class="form-control" type="number" required width="48"  >
            <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/m²</span>
           </div> 
 
@@ -148,7 +148,7 @@
                 <span class="input-group-text" id="basic-addon1">Distance (Δx)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="d_op">
                             {% if d_op == 'mm' %}
                             <option value="mm" selected="selected">millimeters (mm) </option>
@@ -206,7 +206,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Thermal conductivity constant (λ)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="tc" name="tc" value="{{tc}}"  required="" class="form-control" type="text" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="tc" name="tc" value="{{tc}}"  required="" class="form-control" type="number" required width="48"  >
            <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/(m-K)</span>
           </div> 
 
@@ -218,7 +218,7 @@
                 <span class="input-group-text" id="basic-addon1">Temperature difference (ΔT)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="t_op">
                             {% if t_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C) </option>
@@ -287,7 +287,7 @@
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and tc and t and d %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="thermal_conduct">
         <div class="card-header">
             <h2 class="h2">Steps to Find Heat Flux (q):</h2>
         </div>
@@ -462,7 +462,7 @@
 
     {% if Given == "form2" and tc and t and q %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="thermal_conduct">
         <div class="card-header">
             <h2 class="h2">Steps to Find Distance (Δx):</h2>
         </div>
@@ -582,7 +582,7 @@
 
     {% if Given == "form3" and q and t and d %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="thermal_conduct">
         <div class="card-header">
             <h2 class="h2">Steps to Find Thermal conductivity constant (λ):</h2>
         </div>
@@ -622,8 +622,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Kilometer = 1000 Meters</p>
-            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
-            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx)  = Distance(Δx) / 10<sup>3</sup> m</p>
+            <p>Distance(Δx)  = {{d}} / 10<sup>3</sup> m</p>
             <p>Distance(Δx) = {{dm}} m</p>
         </details>            
             
@@ -631,8 +631,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Millimeter = 0.001 Meters</p>
-            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
-            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx)  = Distance(Δx) / 10<sup>3</sup> m</p>
+            <p>Distance(Δx)  = {{d}} / 10<sup>3</sup> m</p>
             <p>Distance(Δx) = {{dm}} m</p>
         </details>
         
@@ -757,7 +757,7 @@
     {% endif %}
     {% if Given == "form4" and q and tc and d %}
     
-    <div class="card c1" id="output">
+    <div class="card c1" id="thermal_conduct">
         <div class="card-header">
             <h2 class="h2">Steps to Find Temperature Difference (ΔT):</h2>
         </div>
@@ -797,8 +797,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Kilometer = 1000 Meters</p>
-            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
-            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx)  = Distance(Δx) / 10<sup>3</sup> m</p>
+            <p>Distance(Δx)  = {{d}} / 10<sup>3</sup> m</p>
             <p>Distance(Δx) = {{dm}} m</p>
         </details>            
             
@@ -806,8 +806,8 @@
             <details class="border border-primary">
             <summary><b>Convert the Distance {{sr}} "{{d_op}}" to "Meter":</b></summary>
             <p>1 Millimeter = 0.001 Meters</p>
-            <p>Distance(Δx)  = Distance(Δx) / 1000 m</p>
-            <p>Distance(Δx)  = {{d}} / 1000 m</p>
+            <p>Distance(Δx)  = Distance(Δx) / 10<sup>3</sup> m</p>
+            <p>Distance(Δx)  = {{d}} / 10<sup>3</sup> m</p>
             <p>Distance(Δx) = {{dm}} m</p>
         </details>
         

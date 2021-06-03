@@ -74,7 +74,7 @@
 
 </script>
 
-<button type="button" hidden id="hassle" onclick="location.href='#output'">ans1</button>
+<button type="button" hidden id="hassle" onclick="location.href='#cooling'">ans1</button>
 {% endif %}
 
 
@@ -142,7 +142,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Initial Temperature (it)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="it" name="it" value="{{it}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="it" name="it" value="{{it}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="it_op">
                             {% if it_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -174,7 +174,7 @@
                 <span class="input-group-text" id="basic-addon1">Ambient Temperature (at)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="at" name="at" value="{{at}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="at" name="at" value="{{at}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="at_op">
                             {% if at_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -202,7 +202,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Cooling constant (k)</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="k" name="k" value="{{k}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="k" name="k" value="{{k}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="k_op">
                             {% if k_op == 'sec' %}
                             <option value="sec" selected="selected">per second (sec⁻¹)</option>
@@ -228,7 +228,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">What's the temperature after time (tp)</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="tp" name="tp" value="{{tp}}"  required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="tp" name="tp" value="{{tp}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="tp_op">
                             {% if tp_op == 'sec' %}
                             <option value="sec" selected="selected">Seconds (sec)</option>
@@ -256,7 +256,7 @@
                 <span class="input-group-text" id="basic-addon1">Temperature (t)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="text" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="t_op">
                             {% if t_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -295,7 +295,7 @@
 <div id="clear">
 <div class="container" style="height: auto !important;">
     {% if Given == "form1" and tp and k and at and it %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="cooling">
         <div class="card-header">
             <h2 class="h2">Steps to Find Temperature:</h2>
         </div>
@@ -426,7 +426,7 @@
     {% endif %}
 
     {% if Given == "form2" and tp and k and t and it %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="cooling">
         <div class="card-header">
             <h2 class="h2">Steps to Find Ambient Temperature (at):</h2>
         </div>
@@ -558,7 +558,7 @@
     {% endif %}
 
     {% if Given == "form3" and tp and k and t and at %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="cooling">
         <div class="card-header">
             <h2 class="h2">Steps to Find Initial Temperature (at):</h2>
         </div>
@@ -690,7 +690,7 @@
     </div>
     {% endif %}
         {% if Given == "form4" and tp and it and t and at %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="cooling">
         <div class="card-header">
             <h2 class="h2">Steps to Find Cooling constant (k):</h2>
         </div>
@@ -824,7 +824,7 @@
     </div>
     {% endif %}
     {% if Given == "form5" and it and k and t and at %}
-    <div class="card c1" id="output">
+    <div class="card c1" id="cooling">
         <div class="card-header">
             <h2 class="h2">Steps to Find What's the temperature after (tp):</h2>
         </div>
