@@ -142,7 +142,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Initial Temperature (it)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="it" name="it" value="{{it}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="it" name="it" value="{{it}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any"  required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="it_op">
                             {% if it_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -174,7 +174,7 @@
                 <span class="input-group-text" id="basic-addon1">Ambient Temperature (at)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="at" name="at" value="{{at}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="at" name="at" value="{{at}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="at_op">
                             {% if at_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -202,7 +202,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Cooling constant (k)</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="k" name="k" value="{{k}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="k" name="k" value="{{k}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="k_op">
                             {% if k_op == 'sec' %}
                             <option value="sec" selected="selected">per second (sec⁻¹)</option>
@@ -228,7 +228,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">What's the temperature after time (tp)</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="tp" name="tp" value="{{tp}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="tp" name="tp" value="{{tp}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="tp_op">
                             {% if tp_op == 'sec' %}
                             <option value="sec" selected="selected">Seconds (sec)</option>
@@ -256,7 +256,7 @@
                 <span class="input-group-text" id="basic-addon1">Temperature (t)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="t_op">
                             {% if t_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C)</option>
@@ -405,7 +405,12 @@
             <p><b>Put values into formula</b></p>
             <p>Temperature T = {{atc}} + ({{itc}} - {{at}}) * exp(- {{ks}} * {{tps}})</p>
             
-            <b>Temperature = {{result}} °C </b>
+            {% if output %}
+                <b>Temperature = {{start}} x <sup>{{end}}</sup> °C </b>
+            {% else %}
+                <b>Temperature = {{result}} °C </b>
+            {% endif %}
+            
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -433,7 +438,7 @@
 
         <div class="card-body">
 
-            <strong>Temperature:-</strong>
+            <strong>Ambient Temperature:-</strong>
             <br>
             <p class="btn btn-outline-secondary active">Ambient Temperature Formula at = t - it * exp(- k * tp)</p>
             <br>
@@ -537,7 +542,11 @@
             <p><b>Put values into formulab</b></p>
             <p>Ambient Temperature at = {{tc}} - {{itc}} * exp(- {{ks}} * {{tps}})</p>
             
-            <b>Temperature = {{result}} °C </b>
+            {% if output %}
+                <b>Ambient Temperature = {{start}} x <sup>{{end}}</sup> °C </b>
+            {% else %}
+                <b>Ambient Temperature = {{result}} °C </b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -670,7 +679,11 @@
             <p><b>Put values into formula</b></p>
             <p>Initial Temperature (it) = {{atc}} + ({{tc}}-{{atc}}) * <sup>-{{ks}}*{{tps}}</sup></p>
             
-            <b>Initial Temperature (it) = {{result}} °C </b>
+            {% if output %}
+                <b>Initial Temperature = {{start}} x <sup>{{end}}</sup> °C </b>
+            {% else %}
+                <b>Initial Temperature = {{result}} °C </b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -803,8 +816,12 @@
             <p><b>Put values into formula</b></p>
             <p>Cooling Constant(K)  ek =  ({{itc}}-{{atc}}) / ({{tc}}-{{atc}})<br> k = In({{ek}}) / {{tps}}
             </p>
+            {% if output %}
+                <b>Cooling Constant(K) = {{start}} x <sup>{{end}}</sup> Sec⁻¹</b>
+            {% else %}
+                <b>Cooling Constant(K) = {{result}} Sec⁻¹ </b>
+            {% endif %}
             
-            <b>Cooling Constant(K) = {{result}} Sec⁻¹ </b>
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -938,8 +955,12 @@
 
             <p><b>Put values into formula</b></p>
             <p>What's the temperature after..(tp) = ({{itc}}-{{atc}}) / ({{tc}}-{{atc}})<br> k = In({{ek}}) / {{kps}}</p>
+            {% if output %}
+                <b>Temperature after..(tp) = {{start}} x <sup>{{end}}</sup> Sec</b>
+            {% else %}
+                <b>Temperature after..(tp) = {{result}} Sec </b>
+            {% endif %}
             
-            <b>Temperature after..(tp) = {{result}} Sec </b>
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">

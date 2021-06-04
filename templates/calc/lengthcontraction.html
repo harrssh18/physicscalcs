@@ -127,7 +127,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Length</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="l" name="l" value="{{l}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="l" name="l" value="{{l}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="l_op">
                             {% if l_op == 'm' %}
                             <option value="m" selected="selected">meter (m)</option>
@@ -182,7 +182,7 @@
                 <span class="input-group-text" id="basic-addon1">Observed Velocity</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="v" name="v" value="{{v}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="v" name="v" value="{{v}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="v_op">
                             {% if v_op == 'm/s' %}
                             <option value="m/s" selected="selected">meter per second(m/s)</option>
@@ -213,7 +213,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Special Relativity</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="sr" name="sr" value="{{sr}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="sr" name="sr" value="{{sr}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="sr_op">
                             {% if sr_op == 'm' %}
                             <option value="m" selected="selected">meter (m)</option>
@@ -404,9 +404,12 @@
             <p><b>Put values into formula</b></p>
 
 
-            <p>Special relativity = {{lm}} * {{y}}</p>
-            
-            <b>Special Relativity = {{result}}  m </b>
+            <p>Special relativity = {{lm}} x {{y}}</p>
+            {% if output %}
+                <b>Special Relativity = {{start}} x 10<sup>{{end}}</sup>  m </b>
+            {% else %}
+                <b>Special Relativity = {{result}} m </b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -593,8 +596,12 @@
             <p><b>Put values into formula</b></p>
             <p>Velocity = {{srm}} / {{lm}}</p>
             
-            <b>Velocity = {{result}} m/s</b>
-
+            
+            {% if output %}
+                <b>Velocity = {{start}} x 10<sup>{{end}}</sup>  m/s </b>
+            {% else %}
+                <b>Velocity = {{result}} m/s</b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -744,7 +751,12 @@
             <p><b>Put values into formula</b></p>
             <p>Velocity = {{srm}} / √(1 - ({{vm}})<sup>2</sup> / (299792458)<sup>2</sup>)</p>
             
-            <b>Velocity = {{result}} meter</b>
+            
+            {% if output %}
+                <b>Length = {{start}} x 10<sup>{{end}}</sup> meter</b>
+            {% else %}
+                <b>Length = {{result}} meter</b>
+            {% endif %}
 
             <details class="border border-primary">
             <summary>All conversion here:</summary>

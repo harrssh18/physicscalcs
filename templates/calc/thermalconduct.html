@@ -136,7 +136,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Heat Flux (q)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="q" name="q" value="{{q}}"  required="" class="form-control" type="number" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="q" name="q" value="{{q}}"  required="" class="form-control" type="number" step="any" required width="48"  >
            <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/m²</span>
           </div> 
 
@@ -148,7 +148,7 @@
                 <span class="input-group-text" id="basic-addon1">Distance (Δx)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="d_op">
                             {% if d_op == 'mm' %}
                             <option value="mm" selected="selected">millimeters (mm) </option>
@@ -206,7 +206,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Thermal conductivity constant (λ)</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="tc" name="tc" value="{{tc}}"  required="" class="form-control" type="number" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="tc" name="tc" value="{{tc}}"  required="" class="form-control" type="number" step="any" required width="48"  >
            <span class="input-group-text inlineFormInputGroup" id="basic-addon1">W/(m-K)</span>
           </div> 
 
@@ -218,7 +218,7 @@
                 <span class="input-group-text" id="basic-addon1">Temperature difference (ΔT)</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="t" name="t" value="{{t}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="t_op">
                             {% if t_op == 'c' %}
                             <option value="c" selected="selected">Celsius (°C) </option>
@@ -454,7 +454,12 @@
 
             <p>Heat Flux (q) = - {{tc}} * {{tm}} / {{dm}} M/w²</p>
             
-            <b>Heat Flux (q) = {{result}} M/w² </b>
+            
+            {% if output %}
+                <b>Heat Flux (q) = {{start}} x <sup>{{end}}</sup> M/w²</b>
+            {% else %}
+                <b>Heat Flux (q) = {{result}} M/w² </b>
+            {% endif %}
             
    </div>
     </div>
@@ -559,7 +564,12 @@
 
             <p>Distance (Δx) = - {{tc}} * {{tm}} / {{q}} m</p>
             
-           <b>Distance (Δx) = {{result}} m </b>
+          
+           {% if output %}
+                <b>Distance (Δx) = {{start}} x <sup>{{end}}</sup> m</b>
+            {% else %}
+                 <b>Distance (Δx) = {{result}} m </b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -750,7 +760,12 @@
 
             <p>Thermal conductivity constant λ = -{{q}} * {{dm}} / {{tm}} M/w²</p>
             
-            <b>Thermal conductivity constant λ = {{result}} M/(m-K) </b>
+            
+            {% if output %}
+                <b>Thermal conductivity constant λ = {{start}} x <sup>{{end}}</sup> M/(m-K)</b>
+            {% else %}
+                <b>Thermal conductivity constant λ = {{result}} M/(m-K) </b>
+            {% endif %}
             
    </div>
     </div>
@@ -860,7 +875,12 @@
 
             <p>Temperature Difference ΔT = {{q}} * {{dm}} / -{{tc}}</p>
             
-            <b>Temperature Difference ΔT = {{result}} °C </b>
+            
+            {% if output %}
+                <b>Temperature Difference ΔT = {{start}} x <sup>{{end}}</sup> °C</b>
+            {% else %}
+                <b>Temperature Difference ΔT = {{result}} °C </b>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -881,6 +901,5 @@
     </div>
     {% endif %}
 </div></div>
-
 
 {% endblock content %}

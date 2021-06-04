@@ -126,7 +126,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"> Separation Distance</span>
             </div>
-            <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+            <input style="margin-top: 5px;width:100%" id="d" name="d" value="{{d}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
                             {% if d_op == 'm' %}
                             <option value="m" selected="selected">meters (m)</option>
@@ -182,7 +182,7 @@
                 <span class="input-group-text" id="basic-addon1">Area</span>
             </div>
             
-           <input style="margin-top: 5px;width:100%" id="a" name="a" value="{{a}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+           <input style="margin-top: 5px;width:100%" id="a" name="a" value="{{a}}"   required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
                         <select class="select form-control" id="inlineFormInputGroup" name="a_op">
                             {% if a_op == 'mm' %}
                             <option value="mm" selected="selected">square millimeters (mm²) </option>
@@ -214,7 +214,7 @@
                             <option value="ft">square feets(ft²)</option>
                             {% endif %}
 
-                            {% if a_op == 'yd' %}
+                            {% if sa_op == 'yd' %}
                             <option value="yd" selected="selected">square yards(yd²)</option>
                             {% else %}
                             <option value="yd">square yards(yd²)</option>
@@ -228,7 +228,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Capacitance</span>
               </div>
-              <input style="margin-top: 5px;width:100%" id="c" name="c" value="{{c}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" required width="48"  >
+              <input style="margin-top: 5px;width:100%" id="c" name="c" value="{{c}}"  required="" oninput="validateNumber(this);" class="form-control" type="number" step="any" required width="48"  >
            <select class="select form-control" id="inlineFormInputGroup" name="c_op">
                             {% if c_op == 'f' %}
                             <option value="f" selected="selected">farads(f)</option>
@@ -412,7 +412,12 @@
 
             <p>Capacitance = {{e}} * 10<sup>-12</sup> * {{a}} / {{d}}</p>
             
-            <p><b>Capacitance = {{result}} F </b></p>
+            {% if output %}
+                <b>Capacitance = {{start}} x 10<sup>{{end}}</sup> F</b>
+            {% else %}
+                <p><b>Capacitance = {{result}} F </b></p>
+            {% endif %}
+            
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -549,7 +554,12 @@
 
             <p>Separation Distance = {{e}} * 10<sup>-12</sup> * {{am}} / {{cm}}</p>
             
-            <p><b>Separation Distance = {{result}} m </b></p>
+            {% if output %}
+                <b>Separation Distance = {{start}} x 10<sup>{{end}}</sup> m</b>
+            {% else %}
+                <p><b>Separation Distance = {{result}} m </b></p>
+            {% endif %}
+            
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
@@ -702,7 +712,12 @@
 
             <p>Area = {{dm}} * {{cm}}/ {{e}} * 10<sup>-12</sup></p>
             
-            <p><b id="formula">Area = {{result}} m<sup>2</sup> </b></p>
+            
+            {% if output %}
+                <b>Area = {{start}} x 10<sup>{{end}}</sup> m<sup>2</sup></b>
+            {% else %}
+                <p><b>Area = {{result}} m<sup>2</sup> </b></p>
+            {% endif %}
             <details class="border border-primary">
             <summary>All conversion here:</summary>
             <p><table style="width:100%">
